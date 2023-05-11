@@ -53,20 +53,33 @@ function preview(input) {
 }
 
 async function handleEdit() {
+    user = localStorage.getItem("payload")
+    user_id = user.slice(-2)[0]
+
+    const response = await fetch('http://127.0.0.1:8000/users/profile/'+ user_id + '/', {
+        method : 'GET'
+    })
+    response_json = await response.json()
+
     const query = 'input[name="tag"]:checked';
     const selectedEls = document.querySelectorAll(query)
+
     const tag = []
     selectedEls.forEach((el) => {
         tag.push(parseInt(el.value))
     })
+
+    console.log(localStorage.getItem("access"))
+    console.log(response_json)
+
+    const email = response_json['email']
+    const password = response_json['password']
     const username = document.getElementById('username').value;
     const bio = document.getElementById('bio').value;
-
-    user = localStorage.getItem("payload")
-    user_id = user.slice(-2)[0]
-
-    const response = await fetch('http://127.0.0.1:8000/users/' + user_id + '/', {
+   
+    const response_edit = await fetch('http://127.0.0.1:8000/users/profile/' + user_id + '/', {
         headers:{
+            'Authorization': 'Bearer ' + localStorage.getItem("access"),
             'content-type':'application/json',
         },
         method:'PUT',
@@ -74,10 +87,11 @@ async function handleEdit() {
             "email": email,
             "password": password,
             "username": username,
+            "bio": bio,
             "tags": tag,
         })
-    })
-    console.log(response)
 
-    
+    })
+    console.log(response_edit)
+    location.href = 'profile.html';
 }

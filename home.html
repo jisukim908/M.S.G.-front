@@ -7,85 +7,11 @@
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
+    <link rel="stylesheet" href="/static/css/feeds/home.css">
+    
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf"
         crossorigin="anonymous"></script>
-    <style>
-        body {
-            background-color: #f5f5f5;
-        }
-
-        .title-center {
-            text-align: center;
-            margin-top: 50px;
-        }
-
-        .wrap {
-            width: 400px;
-            margin: 0 auto;
-        }
-
-        .form-area {
-            margin-top: 25px;
-        }
-
-        .timeline-container {
-            margin-top: 25px
-        }
-
-        .navbar {
-            background-color: #008080;
-        }
-
-        a {
-            color: #ffff
-        }
-
-        .logo-img {
-            width: 80px;
-            padding-right: 30px;
-        }
-
-        .category-container {
-            margin: auto;
-            padding: auto;
-        }
-
-        .category-item {
-            float: left;
-            padding: 5px, 5px, 5px, 5px;
-            margin: auto;
-        }
-
-        ul {
-            color: #008080;
-            list-style-type: none;
-        } 
-        li {
-            list-style-type: none;
-        }
-
-        aside{
-            display: inline;
-            padding-top: 500px;
-            flex: 20%;
-            height:500px;
-            background:purple;
-        }
-        
-        main {flex: 1 1 70%;height:500px; background:gray;}
-
-        .home-container{
-            width: 1240px;
-            background: #e9e9e9;
-            border: 1px solid;
-            padding: 28px 141px 24px 141px;
-            margin-bottom: 8px;
-            float: left;
-            position: relative;
-        }
-    </style>
-    <script src="home.js"></script>
 </head>
 
 <body>
@@ -179,68 +105,92 @@
             <div>
                 <ul>
                     <li class="category-item">
-                        <a> 💾 MaStoryGees </a>
+                        <a class="nav-link" href="home.html"> 💾 MaStoryGees </a>
                     </li>
                     <li class="category-item">
-                        <a id="tag-item" class="nav-link" href="#">반려동물</a>
+                        <a class="nav-link" href="#">반려동물</a>
                     </li>
                     <li class="category-item">
-                        <a id="tag-item" class="nav-link" href="#">음식</a>
+                        <a class="nav-link" href="#">음식</a>
                     </li>
                     <li class="category-item">
-                        <a id="tag-item" class="nav-link" href="#">운동</a>
+                        <a class="nav-link" href="#">운동</a>
                     </li>
                     <li class="category-item">
-                        <a id="tag-item" class="nav-link" href="#">게임</a>
+                        <a class="nav-link" href="#">게임</a>
                     </li>
                     <li class="category-item">
-                        <a id="tag-item" class="nav-link" href="#">뉴스</a>
+                        <a class="nav-link" href="#">뉴스</a>
                     </li>
                     <li class="category-item">
-                        <a id="tag-item" class="nav-link" href="#">요리</a>
+                        <a class="nav-link" href="#">요리</a>
                     </li>
                     <li class="category-item">
-                        <a id="tag-item" class="nav-link" href="#">공예</a>
+                        <a class="nav-link" href="#">공예</a>
                     </li>
                     <li class="category-item">
-                        <a id="tag-item" class="nav-link" href="#">산책</a>
+                        <a class="nav-link" href="#">산책</a>
                     </li>
                     <li class="category-item">
-                        <a id="tag-item" class="nav-link" href="#">쇼핑</a>
+                        <a class="nav-link" href="#">쇼핑</a>
                     </li>
                     <li class="category-item">
-                        <a id="tag-item" class="nav-link" href="#">영화</a>
+                        <a class="nav-link" href="#">영화</a>
                     </li>
                     <li class="category-item">
-                        <a id="tag-item" class="nav-link" href="#">코딩</a>
+                        <a class="nav-link" href="#">코딩</a>
                     </li>
                     <li class="category-item">
-                        <a id="tag-item" class="nav-link" href="#">여행</a>
+                        <a class="nav-link" href="#">여행</a>
                     </li>
                     <li class="category-item">
-                        <a id="tag-item" class="nav-link" href="#">만화</a>
+                        <a class="nav-link" href="#">만화</a>
                     </li>
                     <li class="category-item">
-                        <a id="tag-item" class="nav-link" href="#">그 외</a>
+                        <a class="nav-link" href="#">그 외</a>
                     </li>
                 </ul>
             </div>
         </div>
     </div>
 
-    <aside>
-        프로필
-    </aside>
-    <main id="home-container">
-        <div >
-            카테고리별 게시글 띄우기
+    <div>
+        <div class="main-container">
+            <div class="row">
+                <div class="col-md-2">
+                    <div class="profile-box">
+                        <aside>
+                            프로필
+                        </aside>
+                    </div>
+                </div>
+                <div class="col-md-9">
+                    <div class="main-box">
+                        <div>
+                            <main>
+                                본문
+                                <div class="home-container">
+                                    카테고리별 게시글 띄우기
+                                    <div> 
+                                        <div class="row">
+                                            <div class="col-md-4 col-md-4">1번 게시글</div>
+                                            <div class="col-md-4 col-md-4">2번 게시글</div>
+                                            <div class="col-md-4 col-md-4">3번 게시글</div>
+                                            <div class="col-md-4 visible-md">4번 게시글</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="home-container">
+                                    인기 많은 게시글
+                                </div>
+                            </main>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div id="home-container">
-            인기 많은 게시글
-        </div>
-    </main>
-    
-
+    </div>
+    <script src="/static/js/feeds/home.js"></script>
 </body>
 
 <footer>

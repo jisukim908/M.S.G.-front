@@ -16,11 +16,6 @@ window.onload = async function loadProfile() {
     bio.innerText = response_json['bio']
     profile_image.src = 'http://127.0.0.1:8000' + response_json['profile_image']
 
-    const response_tag = await fetch('http://127.0.0.1:8000/users/tag/', {
-        method : 'GET'
-    });
-
-    console.log(response_json['tags'])
     const tags = document.getElementById("tags")
     response_json['tags'].forEach(tag => {
         const user_tag = document.createElement("p")

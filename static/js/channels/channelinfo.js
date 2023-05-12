@@ -108,6 +108,14 @@ window.onload = async function requestChannelInfo() {
         newCardName.innerText = feed.user
         newCardBody.appendChild(newCardName)
 
+        feed['tag'].forEach(tag => {
+            const newCardTag = document.createElement("p")
+            newCardTag.setAttribute("class", "card-tags")
+
+            newCardTag.innerText = tag.name
+            newCardBody.appendChild(newCardTag)
+
+        })
 
         feed_list.appendChild(newCol)
     })

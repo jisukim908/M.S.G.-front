@@ -1,5 +1,5 @@
-window.onload = ()=> {
-    console.log("로딩완")
+window.onload = () => {
+    console.log("로딩완료")
 }
 
 
@@ -8,10 +8,10 @@ async function handleLogin() {
     const password = document.getElementById("password").value;
 
     const response = await fetch('http://127.0.0.1:8000/users/api/token/', {
-        headers:{
-            'content-type':'application/json',
+        headers: {
+            'content-type': 'application/json',
         },
-        method:'POST',
+        method: 'POST',
         body: JSON.stringify({
             "email": email,
             "password": password,

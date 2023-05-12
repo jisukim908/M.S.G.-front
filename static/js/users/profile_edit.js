@@ -32,10 +32,27 @@ window.onload = async function loadProfile() {
         newTag.setAttribute("class", "tag-input")
         newTag.innerText = tag['name']
         tags.appendChild(newTag).appendChild(newInput)
+
     })
     
     response_json['tags'].forEach(e => {
         document.getElementById(e).checked = true;
+    })
+
+    const follows = document.getElementById("follows")
+    response_json['followers'].forEach(follow => {
+        const user_follow = document.createElement("p")
+        user_follow.setAttribute("class", "follow-container")
+        user_follow.innerText = follow['email']
+        const follow_btn = document.createElement("button")
+        follow_btn.setAttribute("type", "button")
+        follow_btn.setAttribute("onclick", "handleFollow(this.id)")
+        follow_btn.setAttribute("id", follow['id'])
+        follow_btn.setAttribute("class", "follow_delete_btn")
+        follow_btn.innerText = "x"
+        follows.appendChild(user_follow).append(follow_btn)
+
+
     })
 }
 
@@ -63,14 +80,10 @@ async function handleEdit() {
 
     const query = 'input[name="tag"]:checked';
     const selectedEls = document.querySelectorAll(query)
-
     const tag = []
     selectedEls.forEach((el) => {
         tag.push(parseInt(el.value))
     })
-
-    console.log(localStorage.getItem("access"))
-    console.log(response_json)
 
     const email = response_json['email']
     const password = response_json['password']
@@ -90,8 +103,20 @@ async function handleEdit() {
             "bio": bio,
             "tags": tag,
         })
-
     })
     console.log(response_edit)
     location.href = 'profile.html';
+}
+
+const handleFollow = (followUserId) => {
+    console.log(followUserId)
+
+    const response_follow = fetch('http://127.0.0.1:8000/users/follow/'+followUserId+'/', {
+        headers:{
+            'Authorization': 'Bearer ' + localStorage.getItem("access"),
+            'content-type':'application/json',
+        },
+        method:'POST',
+    })
+    location.reload()
 }

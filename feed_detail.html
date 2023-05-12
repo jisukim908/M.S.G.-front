@@ -96,39 +96,48 @@
 
     <main>
         <div class="content-container">
-            <div>
-                <div class="row">
+            <div class="row">
+                <div class="content-box">
                     <div class="col-md-9">
                         <div class="main-box">
-                            <div>
-                                <div class="main-content">
-                                    본문 영상/사진
-                                    <div class="home-container">
-                                        글 불러오기
+                            <div class="main-content">
+                                <div class="home-container">
+                                    <div id="video-box">본문 영상/사진</div>
+                                </div>
+                                <div class="home-container">
+                                    <div class="feed-container">
+                                        <h6 id="title"></h6>
+                                        <p id="context"></p>
+                                    </div>
+                                    <div class="like-container">
+                                        <!-- 좋아요 버튼 만들기 -->
+                                        <button type="submit" method="POST"> 좋아요 👍 <p id="like-count"></p></button>
+                                        <div>
+                                            <p id="created_date"></p>
+                                            <p id="updated_date"></p>
+                                        </div>
                                     </div>
                                 </div>
+                            </div> 
+                        </div>
+                    </div>
+                    <div>
+                        <aside class="profile-content">
+                            <div class="profile-box">
+                                <p id="username"></p>
+                                <p>작성자 채널 정보 불러오기</p>
+                                <p></p>
                             </div>
-                            
-                        </div>
-                    </div>
-                    <div class="col-md-2" style="padding-left: 20px;">
-                        <div class="profile-box">
-                            <aside>
-                                게시글 작가 프로필
-                                <p>정보</p>
-                                <p></p>
-                                <p></p>
-                            </aside>
-                        </div>
-                    </div>
-                    <div class="main-box">
-                        댓글란 | 댓글 개수 불러오기
-                        <div>
-                            <p>댓글 가져오기</p>
-                        </div>
-                        
+                        </aside>
                     </div>
                 </div>
+            </div>
+        </div>
+        
+        <div class="main-box">
+            댓글란 | 댓글 개수 불러오기
+            <div>
+                <p>댓글 가져오기</p>
             </div>
         </div>
     </main>

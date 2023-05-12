@@ -23,9 +23,18 @@ async function getFeed(user_id, feed_id) {
         response_json = await response.json()
         return response_json
     } else {
-        alert(response.status)
+        alert("권한이 없습니다.")
     }
 }
+
+//게시글 수정하기 함수
+async function FeedUpdate(user_id, feed_id) {
+    const response = await fetch(`${backend_base_url}/channel/admin/${user_id}/${feed_id}`, {
+        method: 'PUT'
+    })
+}
+
+//게시글 삭제하기 함수
 
 
 window.onload = async function channelDetail() {
@@ -64,20 +73,37 @@ window.onload = async function channelDetail() {
     const response_feed = await getFeed(user_id, feed_id)
     console.log(response_feed)
 
-
+    //feed 가져오기
     response_feed.forEach(feed => {
+        const feedTitle = document.getElementById("feed-title")
+        const feedImage = document.getElementById("feed-image")
+        const feedVideo = document.getElementById("feed-video")
+        const feedContent = document.getElementById("feed-desc")
+        const feedUser = document.getElementById("feed-user")
+        const feedTag = document.getElementById("feed-tags")
+        const feedCreateDate = document.getElementById("feed-createdate")
+        const feedUpdateDate = document.getElementById("feed-updatedate")
+        const feedLike = document.getElementById("likes")
 
+        feedTitle.innerText = feed['title']
+        feedUser.innerText = feed['user']
+
+        if (feed.video_key) {
+            // 비디오 주소 가져오기
+            feedVideo.src = 'https://www.youtube.com/embed/' + feed['video_key']
+            feedImage.src = `${backend_base_url}` + feed['image']
+        } else {
+            feedImage.src = `${backend_base_url}` + feed['image']
+        }
+        feedContent.innerText = feed['context']
+        feed['tag'].forEach(tag => {
+            feedTag.innerText = tag.name
+        })
+        feedCreateDate.innerText = feed['created_date'].slice(0, 10)
+        feedUpdateDate.innerText = feed['updated_date'].slice(0, 10)
+        feedLike.innerText = feed['likes_count']
     })
 
-    const feedTitle = document.getElementById("feed-title")
-    const feedImage = document.getElementById("feed-image")
-    const feedVideo = document.getElementById("feed-video")
-    const feedContent = document.getElementById("feed-desc")
-    const feedCreateDate = document.getElementById("feed-createdate")
-    const feedUpdateDate = document.getElementById("feed-updatedate")
-    const feedLike = document.getElementById("likes")
-    //조회수는 좀 더 찾아보자..
 
-    feedTitle.innerText = response_feed["title"]
-
+    //조회수 기능 추가하기
 }

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,21 +8,20 @@
     <link rel="stylesheet" href="/static/css/users/profile.css">
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@400;600;700;800;900&display=swap"
-      rel="stylesheet"
-    />
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@400;600;700;800;900&display=swap"
+        rel="stylesheet" />
     <script src="/static/js/users/login.js"></script>
     <script src="/static/js/users/profile.js"></script>
     <title>My Page</title>
 </head>
+
 <body>
     <header class="main-header">
         <button class="header-logo">
             <img src="/static/images/logo.png" alt="logo">
         </button>
         <div class="header-btn">
-            <button type="button">내 채널</button>
+            <button type="button" onclick="location.href='channel.html'">내 채널</button>
             <button type="button" onclick="handleLogout()">로그아웃</button>
         </div>
     </header>
@@ -49,13 +49,13 @@
         <section class="user-tag">
             <p class="user-tag-title">관심 태그</p>
             <div id="tags" class="tag-item">
-                
+
             </div>
         </section>
         <section class="user-tag">
             <p class="user-tag-title">관심 태그</p>
             <div id="tags" class="tag-item">
-                
+
             </div>
         </section>
         <section class="profile-btn">
@@ -64,4 +64,5 @@
         </section>
     </main>
 </body>
+
 </html>

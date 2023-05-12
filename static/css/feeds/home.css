@@ -1,37 +1,115 @@
 body {
-    background-color: #f5f5f5;
+    margin: 0;
+    padding: 0;
+    font-family: 'Roboto Slab', serif;
+    background-color: rgb(245, 245, 245);
 }
 
-.title-center {
+.main-header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    height: 150px;
+    align-items: center;
+    background-color: rgb(0, 128, 128);
+
+}
+
+.header-logo {
+    border: none;
+    background: inherit;
+    font-size: 14px;
+    font-family: inherit;
+    padding: 8px;
+    margin-left: 25px;
+    cursor: pointer;
+}
+
+.header-logo img {
+    width: 120px;
+    height: 100%;
+    border-radius: 8px;
+    object-fit: cover;
+}
+
+.header-btn {
+    margin-right: 25px;
+    margin-left: 25px;
+}
+
+.header-btn button {
+    border: none;
+    background: inherit;
+    font-size: 20px;
+    font-family: inherit;
+    padding: 8px;
+    font-weight: bold;
+    color: rgb(255, 255, 255);
+}
+
+.header-btn button:hover {
+    background-color: antiquewhite;
+    border-radius: 8px;
+    color: rgb(35, 35, 35);
+}
+
+
+.main-container {
+    margin: 35px 25px 25px 25px;
+    padding: 16px;
+    border: 1px solid rgb(184, 184, 184);
+    border-radius: 8px;
+}
+
+.channel-info {
+    text-align: left;
+    display: inline;
+}
+
+.channel-info h6 {
+    font-weight: bold;
+}
+
+.channel-info p {
+    text-align: right;
+}
+
+
+.user-image {
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 20px;
+}
+
+.user-image img {
+    border-radius: 8px;
+    object-fit: cover;
+    align-items: center;
+}
+
+
+.tag-item p {
+    margin-right: 5px;
+    border: 3px solid rgb(129, 129, 129);
+    border-radius: 8px;
+    padding: 4px;
     text-align: center;
-    margin-top: 50px;
 }
 
-.wrap {
-    width: 400px;
-    margin: 0 auto;
+.card-img-top {
+    height: 30vh;
 }
 
-.form-area {
-    margin-top: 25px;
+.search {
+    padding-top: 30px;
+    padding-left: 10px
 }
 
-.timeline-container {
-    margin-top: 25px
-}
-
-.navbar {
-    background-color: #008080;
-}
 
 a {
-    color: #ffff
+    color: rgb(255, 255, 255);
 }
 
-.logo-img {
-    width: 80px;
-    padding-right: 30px;
-}
 
 .category-container {
     display: inline-block;

@@ -20,15 +20,15 @@
         <form class="signup-form">
             <label for="email" class="signup-input">
                 email :
-                <input type="email" name="email" id="email">
+                <input type="email" name="email" id="email" required>
             </label>
             <label for="password" class="signup-input">
                 password :
-                <input type="password" name="password" id="password">
+                <input type="password" name="password" id="password" required>
             </label>
             <label for="username" class="signup-input">
                 이름 :
-                <input type="text" name="username" id="username">
+                <input type="text" name="username" id="username" required>
             </label>
             <section>
                 <p>관심 태그를 골라주세요.</p>
@@ -37,7 +37,7 @@
                 </div>
             </section>
             <div class="signup-btn">
-                <button type="button" onclick="handleSignUp()">Sign Up</button>
+                <button type="submit" onclick="handleSignUp()">Sign Up</button>
                 <button type="button" onclick="location.href='login.html'">Login</button>
             </div>
         </form>

@@ -19,7 +19,7 @@
         crossorigin="anonymous"></script>
 </head>
 
-<body>
+<body style="background-color: rgb(245,245,245);">
     <header class="main-header">
         <nav class="nav-left">
             <form class="d-flex">
@@ -72,42 +72,47 @@
                     </div>
                     <div class="col-md-9">
                         <div class="container text-center">
-                            <h1>게시글 상세보기</h1>
+                            <h1>게시글 관리하기</h1>
                             <button onclick="FeedUpdate()" class="feedupdate">수정하기</button>
                             <h2 class="col" id="feed-title">제목:</h2>
                             <h6 class="col" id="feed-user" style="text-align: right;">글쓴이:</h6>
                             <div class="row row-cols-1 row-cols-md-2" id="feed">
+                                <!--게시글 사진-->
                                 <div class="card">
-                                    <div id="feed-image" class="col">게시글 섬네일</div>
+                                    <img src="" id="feed-image" class="col">
                                 </div>
                                 <div class="card">
-                                    <div id="feed-video" class="col">게시글 동영상</div>
-                                </div>
-                            </div>
-
-                            <div class="row row-cols-1" id="feed">
-                                <div class="card">
-                                    <div id="feed-desc" class="col">게시글 설명</div>
-                                </div>
-                                <div class="card">
-                                    <div id="feed-createdate" class="col">게시글 생성날짜</div>
-                                    <div id="feed-updatedate" class="col">게시글 수정날짜</div>
+                                    <iframe src="" id="feed-video" class="col">게시글 동영상</iframe>
                                 </div>
                             </div>
+                        </div>
 
-                            <div class="row row-cols-1 row-cols-md-2" id="feed">
-                                <div class="card">
-                                    <div id="hitcount" class="col">게시글 조회수</div>
-                                </div>
-                                <div class="card">
-                                    <div id="likes" class="col">게시글 좋아요수</div>
-                                </div>
-
+                        <div class="row row-cols-1" id="feed">
+                            <div class="card">
+                                <div id="feed-tags" class="col">태그</div>
                             </div>
+                            <div class="card">
+                                <div id="feed-desc" class="col">게시글 설명</div>
+                            </div>
+                            <div class="card">
+                                <div id="feed-createdate" class="col">게시글 생성날짜</div>
+                                <div id="feed-updatedate" class="col">게시글 수정날짜</div>
+                            </div>
+                        </div>
+
+                        <div class="row row-cols-1 row-cols-md-2" id="feed">
+                            <div class="card">
+                                <div id="hitcount" class="col">게시글 조회수</div>
+                            </div>
+                            <div class="card">
+                                <div id="likes" class="col">게시글 좋아요수</div>
+                            </div>
+
                         </div>
                     </div>
                 </div>
             </div>
+        </div>
     </main>
 </body>
 

@@ -6,6 +6,7 @@ window.onload = async function loadProfile() {
         method : 'GET'
     })
     response_json = await response.json()
+
     const email = document.getElementById('email')
     const username = document.getElementById('username')
     const bio = document.getElementById('bio')
@@ -15,12 +16,20 @@ window.onload = async function loadProfile() {
     username.innerText = response_json['username']
     bio.innerText = response_json['bio']
     profile_image.src = 'http://127.0.0.1:8000' + response_json['profile_image']
-
+    
     const tags = document.getElementById("tags")
     response_json['tags'].forEach(tag => {
         const user_tag = document.createElement("p")
         user_tag.innerText = tag
         tags.appendChild(user_tag)
+    })
+
+    console.log(response_json)
+    const follows = document.getElementById("follows")
+    response_json['followers'].forEach(follow => {
+        const user_follow = document.createElement("p")
+        user_follow.innerText = follow['email']
+        follows.appendChild(user_follow)
     })
 
 }

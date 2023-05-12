@@ -31,18 +31,25 @@ async function handleSignUp() {
     const password = document.getElementById('password').value;
     const username = document.getElementById('username').value;
 
-    const response = await fetch('http://127.0.0.1:8000/users/signup/', {
-        headers:{
-            'content-type':'application/json',
-        },
-        method:'POST',
-        body: JSON.stringify({
-            "email": email,
-            "password": password,
-            "username": username,
-            "tags": tag,
+    if (tag.length == 0) {
+        alert("태그를 1개 이상 선택해주세요.")
+    }
+    else {
+        const response = await fetch('http://127.0.0.1:8000/users/signup/', {
+            headers:{
+                'content-type':'application/json',
+            },
+            method:'POST',
+            body: JSON.stringify({
+                "email": email,
+                "password": password,
+                "username": username,
+                "tags": tag,
+            })
         })
-    })
-    console.log(response)
-    location.href = 'login.html';
+        console.log(response)
+        alert("가입완료! 이메일 인증을 해야 로그인가능합니다.");
+        location.href = 'login.html';
+    }
+
 }

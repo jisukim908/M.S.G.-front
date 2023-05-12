@@ -188,3 +188,32 @@ body {
     margin-right: 12px;
 }
 
+.follow-view {
+    height: 50px;
+    width: 250px;
+    font-size: 20px;
+    background-color: transparent;
+}
+
+.follow-view option {
+    font-size: 20px;
+}
+
+
+.follow-container {
+    display: flex;
+}
+
+.follow-container button {
+    border: 1px solid rgb(255, 120, 120);
+    background-color: rgb(255, 120, 120);
+    color: rgb(255, 255, 255);
+    border-radius: 16px;
+    margin-left: 8px;
+    padding-bottom: 4px;
+    font-weight: bold;
+}
+
+.follow-container button:hover {
+    cursor: pointer;
+}

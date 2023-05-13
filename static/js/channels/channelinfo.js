@@ -90,8 +90,6 @@ window.onload = async function requestChannelInfo() {
         } else {
             feedImage.setAttribute("src", "/static/img/default_image.jpg")
         }
-
-
         newCard.appendChild(feedImage)
 
         const newCardBody = document.createElement("div")
@@ -107,7 +105,6 @@ window.onload = async function requestChannelInfo() {
         newCardName.setAttribute("class", "card-text")
         newCardName.innerText = feed.user
         newCardBody.appendChild(newCardName)
-
 
         feed_list.appendChild(newCol)
     })

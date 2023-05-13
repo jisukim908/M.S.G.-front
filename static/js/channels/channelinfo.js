@@ -85,10 +85,11 @@ window.onload = async function requestChannelInfo() {
         const feedImage = document.createElement("img")
         feedImage.setAttribute("class", "card-img-top")
 
-        if (feed.image) {
-            feedImage.setAttribute("src", `${backend_base_url}${feed.image}`)
+        //섬네일
+        if (feed.video_key) {
+            feedImage.setAttribute("src", "https://img.youtube.com/vi/" + feed['video_key'] + "/mqdefault.jpg")
         } else {
-            feedImage.setAttribute("src", "/static/img/default_image.jpg")
+            feedImage.setAttribute("src", `${backend_base_url}${feed.image}`)
         }
         newCard.appendChild(feedImage)
 
@@ -106,7 +107,18 @@ window.onload = async function requestChannelInfo() {
         newCardName.innerText = feed.user
         newCardBody.appendChild(newCardName)
 
+        feed['tag'].forEach(tag => {
+            const newCardTag = document.createElement("p")
+            newCardTag.setAttribute("class", "card-tags")
+
+            newCardTag.innerText = tag.name
+            newCardBody.appendChild(newCardTag)
+
+        })
+
         feed_list.appendChild(newCol)
     })
 
 }
+
+//내가 좋아요한 게시글 모아보기 추가하기

@@ -67,6 +67,7 @@ window.onload = async function channelDetail() {
     console.log(response_feed)
 
     feed_list = document.getElementById("feedupdate")
+    button_list = document.getElementById("updatebutton")
 
     //feed 가져오기
     response_feed.forEach(feed => {
@@ -79,6 +80,7 @@ window.onload = async function channelDetail() {
         newTitlename.setAttribute("class", "title")
         newTitlename.setAttribute("id", "feed-title")
         newTitlename.setAttribute("type", "text")
+        newTitlename.setAttribute("placeholder", feed['title'])
 
         const newUser = document.createElement("h6")
         newUser.setAttribute("class", "col")
@@ -87,32 +89,50 @@ window.onload = async function channelDetail() {
         newUser.innerHTML = "글쓴이:"
         newUser.innerText = feed['user']
 
-        const originMedia = document.createElement("h5")
-        originMedia.setAttribute("class", "card")
-        originMedia.innerHTML = "원본"
+        const originMedianame = document.createElement("h5")
+        originMedianame.setAttribute("class", "card")
+        originMedianame.innerHTML = "원본"
+
+        const originMedia = document.createElement("div")
+        originMedia.setAttribute("class", "row row-cols-1 row-cols-md-2")
+        originMedia.setAttribute("id", "feed")
+
+        const originImage = document.createElement("img")
+        originImage.setAttribute("class", "col")
+        originImage.setAttribute("id", "feed-image")
+        originImage.setAttribute("src", `${backend_base_url}${feed['image']}`)
+
+
+        const originVideo = document.createElement("iframe")
+        originVideo.setAttribute("class", "col")
+        originVideo.setAttribute("id", "feed-video")
+
+        if (feed['video_key']) {
+            originVideo.setAttribute("src", 'https://www.youtube.com/embed/' + `${feed['video_key']}`)
+        }
+
+        originMedia.appendChild(originImage)
+        originMedia.appendChild(originVideo)
+
+        const newMedianame = document.createElement("h5")
+        newMedianame.setAttribute("class", "card")
+        newMedianame.innerHTML = "아래에 업로드할 파일과 동영상 key를 넣어주세요."
 
         const newMedia = document.createElement("div")
         newMedia.setAttribute("class", "row row-cols-1 row-cols-md-2")
         newMedia.setAttribute("id", "feed")
 
-        const newImage = document.createElement("img")
-        newImage.setAttribute("class", "col")
-        newImage.setAttribute("id", "feed-image")
-        newImage.setAttribute("src", `${backend_base_url}${feed['image']}`)
+        const newImage = document.createElement("input")
+        newImage.setAttribute("type", "file")
+        newImage.setAttribute("onchange", "preview(this)")
 
+        const newVideo = document.createElement("input")
+        newVideo.setAttribute("type", "text")
+        newVideo.setAttribute("placeholder", feed['video_key'])
 
-        const newVideo = document.createElement("iframe")
-        newVideo.setAttribute("class", "col")
-        newVideo.setAttribute("id", "feed-video")
-
-        if (feed['video_key']) {
-            newVideo.setAttribute("src", 'https://www.youtube.com/embed/' + `${feed['video_key']}`)
-        }
 
         newMedia.appendChild(newImage)
         newMedia.appendChild(newVideo)
-
-
 
         const newContent = document.createElement("div")
         newContent.setAttribute("class", "row row-cols-1")
@@ -126,15 +146,32 @@ window.onload = async function channelDetail() {
         const newDesc = document.createElement("input")
         newDesc.setAttribute("class", "card")
         newDesc.setAttribute("id", "feed-desc")
+        newDesc.setAttribute("placeholder", feed['context'])
         newContent.appendChild(newDesc)
 
+        const updateButton = document.createElement("button")
+        updateButton.setAttribute("type", "button")
+        updateButton.setAttribute("class", "feedupdate")
+        updateButton.setAttribute("style", "margin-right:10px;")
+        updateButton.setAttribute("id", feed_id)
+        updateButton.setAttribute("onclick", "FeedUpdate(this.id)")
+        updateButton.innerHTML = "수정완료"
+
+        const backButton = document.createElement("button")
+        backButton.setAttribute("onclick", "history.back()")
+        backButton.innerHTML = "뒤로가기"
 
         feed_list.appendChild(newTitle)
         feed_list.appendChild(newTitlename)
         feed_list.appendChild(newUser)
+        feed_list.appendChild(originMedianame)
         feed_list.appendChild(originMedia)
+        feed_list.appendChild(newMedianame)
         feed_list.appendChild(newMedia)
         feed_list.appendChild(newContent)
+
+        button_list.appendChild(updateButton)
+        button_list.appendChild(backButton)
     })
 
 
@@ -168,13 +205,27 @@ window.onload = async function channelDetail() {
 async function FeedUpdate(feed_id) {
     user = localStorage.getItem("payload")
     user_id = user.slice(-2)[0]
+    console.log(feed_id)
+    //누르는 순간 생겼다가 사라져요..ㅜㅜ
+    //왜 이럴까요..ㅜㅜ
 
+    const response_feed_update = await fetch(`${backend_base_url}/channel/admin/${user_id}/${feed_id}` + '/', {
+        method: 'GET'
+    })
+    response_feed_update_json = await response_feed_update.json()
 
-    const title = response_feed_json['title']
-    const context = response_feed_json['context']
-    const video_key = response_feed_json['video_key']
+    const query = 'input[name="tag"]:checked';
+    const selectedEls = document.querySelectorAll(query)
+    const tag = []
+    selectedEls.forEach((el) => {
+        tag.push(parseInt(el.value))
+    })
 
-    const response_edit_feed = await fetch(`${backend_base_url}/channel/admin/${user_id}/${e}` + '/', {
+    const title = response_feed_update_json['title']
+    const context = response_feed_update_json['context']
+    const video_key = response_feed_update_json['video_key']
+
+    const response_edit_feed = await fetch(`${backend_base_url}/channel/admin/${user_id}/${feed_id}` + '/', {
         header: {
             'Authorization': 'Bearer ' + localStorage.getItem("access"),
             'content-type': 'application/json',
@@ -188,9 +239,11 @@ async function FeedUpdate(feed_id) {
         })
     })
 
-    response__edit_feed_json = await response_edit_feed.json()
+    console.log(response_edit_feed)
     location.href = "channeldetail.html";
+
 }
+
 
 //사진 미리보기
 function preview(input) {

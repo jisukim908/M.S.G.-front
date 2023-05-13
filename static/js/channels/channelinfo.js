@@ -108,7 +108,7 @@ window.onload = async function requestChannelInfo() {
         newCardBody.appendChild(newCardName)
 
         feed['tag'].forEach(tag => {
-            const newCardTag = document.createElement("p")
+            const newCardTag = document.createElement("button")
             newCardTag.setAttribute("class", "card-tags")
 
             newCardTag.innerText = tag.name

@@ -48,10 +48,10 @@ window.onload = async function loadProfile() {
         //video_key 확인
         video_in = Object.keys(feed).includes('video_key')
         console.log(video_in) //true
-
+        console.log(feed['video_key'])
         if(video_in === true){
             //video key가 있으면 썸네일 가져와서 넣어주기
-            feedImage.setAttribute("src", "https://img.youtube.com/vi/" + feed['video_key'] + "/mqdefault.jpg")
+            feedImage.setAttribute("src", "https://img.youtube.com/vi/" + `${feed['video_key']}` + "/mqdefault.jpg")
         } else if(feed['image'] === true) {
             //image가 있으면 넣어주기
             feedImage.setAttribute("src", `${backend_base_url}${feed.image}`)

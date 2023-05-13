@@ -118,7 +118,7 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div> 
+                            </div>
                         </div>
                     </div>
                     <div>
@@ -133,15 +133,22 @@
                 </div>
             </div>
         </div>
-        
+
         <div class="main-box">
-            댓글란 | 댓글 개수 불러오기
+            댓글란 | <span id="comment-count">0</span>개의 댓글
             <div>
-                <p>댓글 가져오기</p>
+                <button onclick="getComments()">댓글 가져오기</button>
+                <input type="text" id="comment-text" placeholder="댓글을 입력하세요.">
+                <button onclick="createComment()">댓글 작성</button>
             </div>
+            <ul id="comment-list"></ul>
+        </div>
+
+
         </div>
     </main>
     <script src="/static/js/feeds/feed_detail.js"></script>
+    <script src="/static/js/feeds/comments.js"></script>
 </body>
 
 <footer>

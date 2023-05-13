@@ -27,7 +27,7 @@ window.onload = async function getFeedDetail(){
 
     const urlParams = new URL(location.href).searchParams;
     const feed_id = urlParams.get('id');
-    
+
     const response = await fetch(`${backend_base_url}`+ '/' + feed_id + '/', {
         method : 'GET'
     })
@@ -49,7 +49,7 @@ window.onload = async function getFeedDetail(){
     createdDate.innerText = new Date().toString(response_json['created_date']) + " 작성"
     updatedDate.innerText = new Date().toString(response_json['updated_date']) + " 수정"
     console.log(response_json['likes_count'])
-    
+
     // user 정보, channel정보 받아와야함(백엔드 구현)
     const username = document.getElementById('user')
     username.innerText = response_json['user']
@@ -70,7 +70,7 @@ window.onload = async function getFeedDetail(){
         feedVideo.muted = false;
         feedVideo.height = 240; // in px
         feedVideo.width = 320; // in px
-                
+        
         videoBox.appendChild(feedVideo);
         
     } else if(response_json['image'] !== null) {
@@ -128,11 +128,4 @@ async function inputComment() {
     console.log(response_input)
     location.reload()
 }
-
-
-
-
-
-
-    
 

@@ -104,3 +104,27 @@ body {
     padding-top: 30px;
     padding-left: 10px
 }
+
+.feed-btn {
+    margin: 12px;
+    margin-top: 35px;
+    display: flex;
+    justify-content: end;
+    padding-right: 10px;
+}
+
+#edit {
+    margin-right: 10px;
+}
+
+.feed-image2 img {
+    max-width: 300px;
+}
+
+#feed-tag {
+    float: left;
+    border: 3px solid rgb(129, 129, 129);
+    border-radius: 8px;
+    margin: 5px 5px 5px 5px;
+    padding: 10px 10px 10px 10px;
+}

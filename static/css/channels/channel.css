@@ -104,3 +104,11 @@ body {
     padding-top: 30px;
     padding-left: 10px
 }
+
+.card-tags {
+    float: left;
+    border: 3px solid rgb(129, 129, 129);
+    border-radius: 8px;
+    margin-right: 5px;
+    margin-top: 3px;
+}

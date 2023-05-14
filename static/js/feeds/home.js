@@ -19,6 +19,8 @@ async function hit(feed_id) {
 
 window.onload = async function loadProfile() {
 
+    
+
     //태그 띄우기
     const response_tag = await fetch('http://127.0.0.1:8000/users/tag/', {
         method: 'GET'

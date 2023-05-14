@@ -183,3 +183,9 @@ main {
 #feed_card {
     width: 100%;
 }
+
+.card-img-top {
+        display:block;
+        width:100%;
+        height:auto;
+}

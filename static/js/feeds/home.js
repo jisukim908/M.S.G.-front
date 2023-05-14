@@ -72,7 +72,8 @@ window.onload = async function loadProfile() {
         if (video_in === true) {
             //video key가 있으면 썸네일 가져와서 넣어주기
             feedImage.setAttribute("src", "https://img.youtube.com/vi/" + `${feed['video_key']}` + "/mqdefault.jpg")
-        } else if(feed['image'] === true) {
+        } else if (feed['image'] === true) {
+
             //image가 있으면 넣어주기
             feedImage.setAttribute("src", `${backend_base_url}${feed.image}`)
         } else {

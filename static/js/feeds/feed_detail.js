@@ -1,9 +1,7 @@
 const backend_base_url = "http://127.0.0.1:8000"
 const frontend_base_url = "http://127.0.0.1:5501"
 
-
-
-window.onload = async function getFeedDetail() {
+window.onload = async function getFeedDetail(){
     console.log("콘솔 불러오기")
 
     // 태그 띄우기
@@ -103,7 +101,7 @@ window.onload = async function getFeedDetail() {
 
         // Use remote file
         feedVideo.setAttribute("src", 'https://www.youtube.com/embed/' + `${response_json['video_key']}`)
-        
+
         videoBox.appendChild(feedVideo);
         
 

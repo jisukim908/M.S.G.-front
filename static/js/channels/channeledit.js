@@ -153,8 +153,9 @@ window.onload = async function channelDetail() {
         updateButton.setAttribute("type", "button")
         updateButton.setAttribute("class", "feedupdate")
         updateButton.setAttribute("style", "margin-right:10px;")
-        updateButton.setAttribute("id", feed_id)
-        updateButton.setAttribute("onclick", "FeedUpdate(this.id)")
+
+        //updateButton.setAttribute("id", feed_id)
+        updateButton.setAttribute("onclick", `FeedUpdate(${feed['id']})`)
         updateButton.innerHTML = "수정완료"
 
         const backButton = document.createElement("button")
@@ -206,13 +207,10 @@ async function FeedUpdate(feed_id) {
     user = localStorage.getItem("payload")
     user_id = user.slice(-2)[0]
     console.log(feed_id)
-    //누르는 순간 생겼다가 사라져요..ㅜㅜ
-    //왜 이럴까요..ㅜㅜ
 
-    const response_feed_update = await fetch(`${backend_base_url}/channel/admin/${user_id}/${feed_id}` + '/', {
-        method: 'GET'
-    })
-    response_feed_update_json = await response_feed_update.json()
+    const title = document.getElementById('feed-title').value;
+    const video_key = document.getElementById('feed-video').value;
+    const context = document.getElementById('feed-desc').value;
 
     const query = 'input[name="tag"]:checked';
     const selectedEls = document.querySelectorAll(query)
@@ -220,10 +218,6 @@ async function FeedUpdate(feed_id) {
     selectedEls.forEach((el) => {
         tag.push(parseInt(el.value))
     })
-
-    const title = response_feed_update_json['title']
-    const context = response_feed_update_json['context']
-    const video_key = response_feed_update_json['video_key']
 
     const response_edit_feed = await fetch(`${backend_base_url}/channel/admin/${user_id}/${feed_id}` + '/', {
         header: {
@@ -241,7 +235,6 @@ async function FeedUpdate(feed_id) {
 
     console.log(response_edit_feed)
     location.href = "channeldetail.html";
-
 }
 
 
@@ -257,21 +250,4 @@ function preview(input) {
     else {
         document.getElementById("feed-image").src = "";
     }
-}
-
-//게시글 삭제하기 함수
-async function FeedDelete() {
-    user = localStorage.getItem("payload")
-    user_id = user.slice(-2)[0]
-
-    const response = await fetch(`${backend_base_url}/channel/admin/${user_id}/${feedid}`, {
-        header: {
-            'Authorization': 'Bearer ' + localStorage.getItem("access"),
-            'content-type': 'application/json',
-        },
-        method: 'DELETE',
-    })
-
-    console.log(response)
-    location.href = "channel.html";
 }

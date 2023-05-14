@@ -32,6 +32,24 @@ function feedupdate(feed_id) {
     window.location.href = `${frontend_base_url}/channeledit.html?feed_id=${feed_id}`
 }
 
+//삭제기능
+
+//게시글 삭제하기 함수
+async function FeedDelete(feed_id) {
+    user = localStorage.getItem("payload")
+    user_id = user.slice(-2)[0]
+
+    const response = await fetch(`${backend_base_url}/channel/admin/${user_id}/${feed_id}`, {
+        header: {
+            'Authorization': 'Bearer ' + localStorage.getItem("access"),
+            'content-type': 'application/json',
+        },
+        method: 'DELETE',
+    })
+
+    console.log(response)
+    location.href = "channel.html";
+}
 
 window.onload = async function channelDetail() {
     console.log("로딩완료")
@@ -81,6 +99,10 @@ window.onload = async function channelDetail() {
         newButton.setAttribute("onclick", `feedupdate(${feed['id']})`)
         newButton.innerHTML = "수정하기"
         feed_edit.appendChild(newButton)
+        const newDeleteButton = document.createElement("button")
+        newDeleteButton.setAttribute("onclick", `FeedDelete(${feed['id']})`)
+        newDeleteButton.innerHTML = "삭제하기"
+        feed_edit.appendChild(newDeleteButton)
 
         //feed 가져오기
         const newTitle = document.createElement("h2")

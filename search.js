@@ -1,5 +1,5 @@
 const bass_url = "http://127.0.0.1:8000";
-const cardsBox = document.getElementById("cards-box");
+const cardsBox = document.getElementById("feed_card");
 
 async function searchFilter() {
     const input_value = document.getElementById("feed-search").value;

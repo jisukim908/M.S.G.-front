@@ -80,7 +80,9 @@ window.onload = async function channelDetail() {
         newTitlename.setAttribute("class", "title")
         newTitlename.setAttribute("id", "feed-title")
         newTitlename.setAttribute("type", "text")
-        newTitlename.setAttribute("placeholder", feed['title'])
+        newTitlename.setAttribute("value", feed['title'])
+        // newTitlename.innerText = feed['title']
+
 
         const newUser = document.createElement("h6")
         newUser.setAttribute("class", "col")
@@ -128,7 +130,8 @@ window.onload = async function channelDetail() {
 
         const newVideo = document.createElement("input")
         newVideo.setAttribute("type", "text")
-        newVideo.setAttribute("placeholder", feed['video_key'])
+        newVideo.setAttribute("value", feed['video_key'])
+        // newVideo.innerText = feed['video_key']
 
 
         newMedia.appendChild(newImage)
@@ -140,13 +143,14 @@ window.onload = async function channelDetail() {
 
         const newDescname = document.createElement("div")
         newDescname.setAttribute("class", "card")
-        newDescname.innerHTML = "상세설명을 적어주세요."
+        newDescname.innerHTML = "아래에 상세설명을 적어주세요."
         newContent.appendChild(newDescname)
 
         const newDesc = document.createElement("input")
         newDesc.setAttribute("class", "card")
         newDesc.setAttribute("id", "feed-desc")
-        newDesc.setAttribute("placeholder", feed['context'])
+        newDesc.setAttribute("value", feed['context'])
+        //newDesc.innerText = feed['context']
         newContent.appendChild(newDesc)
 
         const updateButton = document.createElement("button")
@@ -196,10 +200,12 @@ window.onload = async function channelDetail() {
         manytag.appendChild(newTag).appendChild(newInput)
     })
 
-    response_feed['tag'].forEach(e => {
-        document.getElementById(e).checked = true;
+    response_feed.forEach(feed => {
+        console.log(feed['tag'])
+        feed['tag'].forEach(e => {
+            document.getElementById(e.name).checked = true;
+        })
     })
-
 }
 
 
@@ -219,10 +225,11 @@ async function FeedUpdate(feed_id) {
         tag.push(parseInt(el.value))
     })
 
+    // 'content-type': 'multipart/form-data',
     const response_edit_feed = await fetch(`${backend_base_url}/channel/admin/${user_id}/${feed_id}` + '/', {
         header: {
             'Authorization': 'Bearer ' + localStorage.getItem("access"),
-            'content-type': 'application/json',
+            'content-type': 'application/json; charset=utf-8',
         },
         method: 'PUT',
         body: JSON.stringify({
@@ -234,7 +241,7 @@ async function FeedUpdate(feed_id) {
     })
 
     console.log(response_edit_feed)
-    location.href = "channeldetail.html";
+    location.href = `${frontend_base_url}/channeldetail.html?feed_id=${feed_id}`
 }
 
 

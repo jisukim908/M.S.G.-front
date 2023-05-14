@@ -1,24 +1,21 @@
 window.onload = async function loadTag() {
     console.log("콘솔 불러오기")
     const response = await fetch('http://127.0.0.1:8000/users/tag/', {
-        method: 'GET'
+        method : 'GET'
     });
 
     response_json = await response.json()
     const tags = document.getElementById("tags")
 
     response_json.forEach(tag => {
-        const newDiv = document.createElement('div')
         const newInput = document.createElement('input')
         newInput.setAttribute("type", "checkbox")
         newInput.setAttribute("name", "tag")
         newInput.setAttribute("value", tag['id'])
-        tags.appendChild(newInput)
         const newTag = document.createElement('label')
+        newTag.setAttribute("class", "tag-input")
         newTag.innerText = tag['name']
-        newDiv.appendChild(newInput)
-        newDiv.appendChild(newTag)
-        tags.appendChild(newDiv)
+        tags.appendChild(newTag).appendChild(newInput)
     })
 
 }
@@ -35,10 +32,10 @@ async function handleSignUp() {
     const username = document.getElementById('username').value;
 
     const response = await fetch('http://127.0.0.1:8000/users/signup/', {
-        headers: {
-            'content-type': 'application/json',
+        headers:{
+            'content-type':'application/json',
         },
-        method: 'POST',
+        method:'POST',
         body: JSON.stringify({
             "email": email,
             "password": password,
@@ -46,5 +43,6 @@ async function handleSignUp() {
             "tags": tag,
         })
     })
+    console.log(response)
     location.href = 'login.html';
 }

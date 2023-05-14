@@ -37,9 +37,14 @@ function feeddetail(feed_id) {
 }
 
 
-window.onload = async function requestChannelInfo() {
+window.onload = async function requestChannelInfo(input) {
     user = localStorage.getItem("payload")
-    user_id = user.slice(-2)[0]
+
+    if (input == user.slice(-2)[0]) {
+        user_id = user.slice(-2)[0]
+    } else {
+        user_id = input
+    }
 
     //프로필정보가져오기
     const response = await fetch(`${backend_base_url}/channel/` + user_id + '/info/', {

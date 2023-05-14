@@ -41,13 +41,15 @@ body {
 .tag-item {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
-    gap: 14px 20px;
+    gap: 15px 20px;
+    justify-content: flex-end;
+    text-align: center;
 }
 
 .tag-input {
     display: flex;
     flex-direction: row-reverse;
-    justify-content: flex-end;
+
 }
 
 .tag-input input {

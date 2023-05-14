@@ -27,7 +27,7 @@ window.onload = async function getFeedDetail(){
 
     const urlParams = new URL(location.href).searchParams;
     const feed_id = urlParams.get('id');
-    
+
     const response = await fetch(`${backend_base_url}`+ '/' + feed_id + '/', {
         method : 'GET'
     })
@@ -49,7 +49,7 @@ window.onload = async function getFeedDetail(){
     createdDate.innerText = new Date().toString(response_json['created_date']) + " 작성"
     updatedDate.innerText = new Date().toString(response_json['updated_date']) + " 수정"
     console.log(response_json['likes_count'])
-    
+
     // user 정보, channel정보 받아와야함(백엔드 구현)
     const username = document.getElementById('user')
     username.innerText = response_json['user']
@@ -57,34 +57,47 @@ window.onload = async function getFeedDetail(){
     //key값에 video_key가 들어왔는지 확인
     video_in = Object.keys(response_json).includes('video_key')
     console.log(response_json['image'])
-    const videoBox = document.getElementById('video-box');
     if(video_in !== null){
         //video 보기, video-box 위치에 입력
-        const feedVideo = document.createElement('video')
+        const videoBox = document.getElementById('video-box');
+        const feedVideo = document.createElement('iframe')
+        feedVideo.setAttribute('class', 'videocard')
         // Use local file
         // video.src = 'video.mp4';
 
         // Use remote file
-        feedVideo.setAttribute = ("src", 'https://www.youtube.com/embed/' + response_json['video_key'])
-        feedVideo.controls = true;
-        feedVideo.muted = false;
-        feedVideo.height = 240; // in px
-        feedVideo.width = 320; // in px
-                
+        feedVideo.setAttribute("src", 'https://www.youtube.com/embed/' + `${response_json['video_key']}`)
+        
         videoBox.appendChild(feedVideo);
         
-    } else if(response_json['image'] !== null) {
-        //image가 있으면 넣어주기
-        const feedImage = document.createElement("img")
-        feedImage.setAttribute("src", `${backend_base_url}` + `${response_json['image']}`)
-        videoBox.appendChild(feedImage)
+        console.log(response_json['image'])
+        //image는 무조건 있는데, default_image인지 확인
+        if (response_json['image'] === "/media/static/default_image.jpg"){
 
+        } else {
+            const imageBox = document.getElementById('image-box');
+            const feedImage = document.createElement("img")
+            feedImage.setAttribute('class', 'imagecard')
+            feedImage.setAttribute("src", `${backend_base_url}` + `${response_json['image']}`)
+            imageBox.appendChild(feedImage)
+        }
     } else {
-        //image가 없으면 defaultimage 넣어주기?
-        feedImage.setAttribute("src", "/static/img/default_image.jpg")
+        if(response_json['image'] !== null) {
+            //image가 있으면 넣어주기
+            const imageBox = document.getElementById('image-box');
+            const feedImage = document.createElement("img")
+            feedImage.setAttribute('class', 'imagecard')
+            feedImage.setAttribute("src", `${backend_base_url}` + `${response_json['image']}`)
+            imageBox.appendChild(feedImage)
+        } else {
+            //image가 없으면 defaultimage 넣어주기?
+            feedImage.setAttribute("src", "/static/img/default_image.jpg")
+        }
+        likeCount.innerText = response_json['likes_count']
+        hitCount.innerText = response_json['hits']
     }
-    likeCount.innerText = response_json['likes_count']
-    hitCount.innerText = response_json['hits']
+    
+    
 
     // 댓글 불러오기
     commentCount.innerText = response_json['comments_count']
@@ -128,11 +141,4 @@ async function inputComment() {
     console.log(response_input)
     location.reload()
 }
-
-
-
-
-
-
-    
 

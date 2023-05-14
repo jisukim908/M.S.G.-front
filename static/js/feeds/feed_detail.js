@@ -2,8 +2,6 @@ const backend_base_url = "http://127.0.0.1:8000"
 const frontend_base_url = "http://127.0.0.1:5501"
 
 window.onload = async function getFeedDetail(){
-    console.log("콘솔 불러오기")
-
     // 태그 띄우기
     const response_tag = await fetch(`${backend_base_url}`+ '/users/tag/', {
         method : 'GET'
@@ -32,6 +30,7 @@ window.onload = async function getFeedDetail(){
         method: 'GET'
     })
     response_json = await response.json()
+    console.log(response_json)
 
     // 본문 내용
     const title = document.getElementById('title')

@@ -69,3 +69,53 @@
     padding: 30px 30px 30px 30px;
     margin: auto;
 }
+
+
+.create-title {
+    float:left;
+    margin-right: 15px;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.helptext1{
+    padding-top: 2px;
+    color: red;
+}
+
+.helptext {
+    padding-top: 2px;
+    color: red;
+    clear: both;
+    position: absolute;
+}
+
+.feed-title {
+    margin-bottom: 30px; 
+}
+.feed-context{
+    margin-bottom: 30px; 
+}
+
+.image-field {
+    float: right;
+    margin-right: 20px;
+}
+
+.feed-tag {
+    margin-top: 50px;
+}
+
+
+.image-field {
+    float:right;
+    margin-right: 30px;
+    width: auto;
+    height: 240px;
+    border: 1px solid #e9e9e9;
+    overflow: auto;
+}
+
+.image-context {
+    float: right;
+}

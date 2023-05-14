@@ -39,27 +39,36 @@
     <main class="main-container">
         <div>
             <section class="feed-section">
-                <div class="feed-information">
-                    <p> 제목 :  * 필수입력 </p>
+                <section class="feed-information">
+                    <p class="create-title"> 제목 : </p>
+                    <p class='helptext1'> * 필수입력 </p>
                     <input type="text" id="title" class="feed-title"></input>
-                </div>
-            
+                </section>
                 <div>
-                    <p> 글 내용 :</p>
-                    <textarea id="context" cols="70" rows="10" class="feed-context"></textarea>
+                    <p class="create-title"> 글 내용 : </p>
+                    <textarea id="context" cols="50" rows="10" class="feed-context"></textarea>
+                    <div class="image-field">
+                        <!-- 입력 받은 이미지 미리보기 -->
+                        <img src='' alt="insert_new_image" id="image_preview">
+                    </div>
                 </div>
-                <div>
-                    <p> 사진 혹은 썸네일 : </p>
-                    <input type="file" id="image" name="feedImage"></input>
-                </div>
-                <div>
-                    <p> 비디오 키 :  * www.youtube.com/watch?v= 뒤의 KEY를 입력하세요</p>
+                <section class="image-context">
+                    <p class="create-title"> 사진 : </p>
+                    <input type="file" id="image" onchange="preview(this)"></input>
+                    <p class='helptext'> * 비디오 입력 시 youtube 썸네일이 게시글 썸네일이 됩니다 </p>
+                </section>
+                <section>
+                    <p class="create-title"> 비디오 키 : </p>
                     <input type="text" id="video key" class="video-key"></input>
-                </div>
-                <div>
-                    <p> 관심 태그 : * 1개만 선택해주세요 </p>
-                    <input type="text" id="tag" class="tag"></input>
-                </div>
+                    <p class='helptext'> * www.youtube.com/watch?v= 뒤의 KEY를 입력하세요 </p>
+                </section>
+                <section>
+                    <div class="feed-tag">
+                        <p class="create-title"> 게시글 관련 태그를 골라주세요 : </p>
+                        <p type="text" id="tag" class="tag"></input>
+                        <div id="tags" class="tag-item">
+                    </div>
+                </section>
 
             </section>
         </div>

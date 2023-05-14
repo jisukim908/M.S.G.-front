@@ -29,7 +29,7 @@ async function handleLogin() {
     }).join(''));
 
     localStorage.setItem("payload", jsonPayload);
-    location.href = 'index.html';
+    location.href = 'home.html';
 }
 
 async function handleLogout() {

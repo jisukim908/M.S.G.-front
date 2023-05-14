@@ -4,6 +4,8 @@ const frontend_base_url = "http://127.0.0.1:5501"
 window.onload = async function loadProfile() {
     console.log("로딩 완료")
 
+    
+
     //태그 띄우기
     const response_tag = await fetch('http://127.0.0.1:8000/users/tag/', {
         method : 'GET'

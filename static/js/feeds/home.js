@@ -1,6 +1,25 @@
 const backend_base_url = "http://127.0.0.1:8000"
 const frontend_base_url = "http://127.0.0.1:5501"
 
+//조회수 올리기 함수
+async function hit(feed_id) {
+    console.log("조회수 +1")
+
+    user = localStorage.getItem("payload")
+    user_id = user.slice(-2)[0]
+
+    const response = await fetch(`${backend_base_url}/${user_id}/${feed_id}` + '/', {
+        headers: {
+            'content-type': 'application/json',
+        },
+        method: 'POST',
+    })
+
+    console.log(response)
+    location.href = `../../feed_detail.html?id=${feed_id}`;
+}
+
+
 window.onload = async function loadProfile() {
     console.log("로딩 완료")
 
@@ -35,7 +54,11 @@ window.onload = async function loadProfile() {
         // feed 가지고오기
         const newCol = document.createElement("a")
         newCol.setAttribute("class", "col-md-3 col-sm-6 col-lg-2")
-        newCol.setAttribute("href", `../../feed_detail.html?id=${feed.id}`)
+        // newCol.setAttribute("href", `../../feed_detail.html?id=${feed.id}`)
+
+        // 조회수 클릭하면 올리기
+        newCol.setAttribute("onclick", `hit(${feed.id})`)
+
         const newCard = document.createElement("a")
         newCard.setAttribute("type", "button")
         newCard.setAttribute("class", "card")
@@ -49,7 +72,8 @@ window.onload = async function loadProfile() {
         video_in = Object.keys(feed).includes('video_key')
         console.log(video_in) //true
 
-        console.log(feed['video_key'])
+        console.log(feed['video_key']) //undefined가 뜨네요..??
+
         if (video_in === true) {
             //video key가 있으면 썸네일 가져와서 넣어주기
             feedImage.setAttribute("src", "https://img.youtube.com/vi/" + `${feed['video_key']}` + "/mqdefault.jpg")

@@ -55,7 +55,7 @@ window.onload = async function getFeedDetail() {
     username.innerText = response_json['user']
 
     //key값에 video_key가 들어왔는지 확인
-    video_in = Object.keys(response_json).includes('video_key')
+    const video_in = Object.keys(response_json).includes('video_key')
     console.log(response_json['image'])
     if (video_in !== null) {
         //video 보기, video-box 위치에 입력

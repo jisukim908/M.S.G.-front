@@ -66,7 +66,7 @@ window.onload = async function loadProfile() {
         feedImage.setAttribute("class", "card-img-top")
 
         //video_key 확인
-        video_in = Object.keys(feed).includes('video_key')
+        const video_in = Object.keys(feed).includes('video_key')
         console.log(video_in) //true
 
         console.log(feed['video_key']) //undefined가 뜨네요..??

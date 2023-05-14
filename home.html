@@ -83,6 +83,16 @@
         </div>
     </div>
     <script src="search.js"></script>
+    <script>
+    window.addEventListener('DOMContentLoaded', (event) => {
+      const urlParams = new URLSearchParams(window.location.search);
+      const searchKeyword = urlParams.get('search');
+      if (searchKeyword) {
+        document.getElementById('feed-search').value = searchKeyword;
+        searchFilter(); // search.js의 searchFilter() 함수 호출하여 검색 결과 표시
+      }
+    });
+    </script>
 
 </body>
 

@@ -3,27 +3,34 @@ const cardsBox = document.getElementById("feed_card");
 
 async function searchFilter() {
     const input_value = document.getElementById("feed-search").value;
-
+  
     const response = await fetch(`${bass_url}/search/?search=${input_value}`, {
-        method: 'GET'
+      method: 'GET'
     });
-
+  
     const response_json = await response.json();
     console.log(response_json);
-
+  
+    const cardsBox = document.getElementById("feed_card");
     cardsBox.innerHTML = '';
-
+  
     response_json.forEach((result) => {
-        const newCol = document.createElement("div");
-        newCol.setAttribute("class", "col-md-4 col-6");
+        const cardLink = document.createElement("a");
+        cardLink.setAttribute("href", `../../feed_detail.html?id=${result.id}`);
+        cardLink.setAttribute("class", "card-link");
 
         const newCard = document.createElement("div");
         newCard.setAttribute("class", "card");
         newCard.setAttribute("id", result.id);
-        // console.log(result.id)
 
         const image = document.createElement("img");
-        image.setAttribute("src", result.image);
+        image.setAttribute("class", "card-img-top");
+
+        if (result.image) {
+            image.setAttribute("src", result.image);
+        } else {
+            image.setAttribute("src", "/static/img/default_image.jpg");
+        }
 
         const cardBody = document.createElement("div");
         cardBody.setAttribute("class", "card-body");
@@ -42,11 +49,8 @@ async function searchFilter() {
         newCard.appendChild(image);
         newCard.appendChild(cardBody);
 
-        newCol.appendChild(newCard);
-
-        cardsBox.appendChild(newCol);
+        cardLink.appendChild(newCard);
+        cardsBox.appendChild(cardLink);
     });
-
-    location.href = `${frontend_base_url}/home.html?search=${input_value}`
 }
 

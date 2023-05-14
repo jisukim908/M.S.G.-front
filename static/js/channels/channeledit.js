@@ -107,7 +107,7 @@ window.onload = async function channelDetail() {
 
         const originVideo = document.createElement("iframe")
         originVideo.setAttribute("class", "col")
-        originVideo.setAttribute("id", "feed-video")
+        originVideo.setAttribute("id", "origin-video")
 
         if (feed['video_key']) {
             originVideo.setAttribute("src", 'https://www.youtube.com/embed/' + `${feed['video_key']}`)
@@ -130,7 +130,9 @@ window.onload = async function channelDetail() {
 
         const newVideo = document.createElement("input")
         newVideo.setAttribute("type", "text")
+        newVideo.setAttribute("id", "feed-video")
         newVideo.setAttribute("value", feed['video_key'])
+        console.log(feed['video_key'])
         // newVideo.innerText = feed['video_key']
 
 
@@ -215,8 +217,11 @@ async function FeedUpdate(feed_id) {
     console.log(feed_id)
 
     const title = document.getElementById('feed-title').value;
+    console.log(title)
     const video_key = document.getElementById('feed-video').value;
+    console.log(video_key)
     const context = document.getElementById('feed-desc').value;
+    console.log(context)
 
     const query = 'input[name="tag"]:checked';
     const selectedEls = document.querySelectorAll(query)
@@ -224,12 +229,15 @@ async function FeedUpdate(feed_id) {
     selectedEls.forEach((el) => {
         tag.push(parseInt(el.value))
     })
+    console.log(tag)
+    //alert("멈춰")
+
 
     // 'content-type': 'multipart/form-data',
     const response_edit_feed = await fetch(`${backend_base_url}/channel/admin/${user_id}/${feed_id}` + '/', {
-        header: {
+        headers: {
             'Authorization': 'Bearer ' + localStorage.getItem("access"),
-            'content-type': 'application/json; charset=utf-8',
+            'content-type': 'application/json'
         },
         method: 'PUT',
         body: JSON.stringify({
@@ -240,7 +248,6 @@ async function FeedUpdate(feed_id) {
         })
     })
 
-    console.log(response_edit_feed)
     location.href = `${frontend_base_url}/channeldetail.html?feed_id=${feed_id}`
 }
 

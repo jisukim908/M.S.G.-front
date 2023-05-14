@@ -19,7 +19,7 @@
     <title>MaStoryGee</title>
 </head>
 
-<body>
+<body style="background-color: rgb(245,245,245);">
     <header class="main-header">
         <nav class="nav-left">
             <form class="d-flex">
@@ -35,6 +35,7 @@
             </form>
         </nav>
         <div class="header-btn">
+            <button onclick="location.href='home.html'">Home</button>
             <button onclick="location.href='profile.html'">내 프로필</button>
             <button onclick="location.href='channel.html'">내 채널</button>
             <button onclick="handleLogout()">로그아웃</button>
@@ -79,7 +80,7 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div> 
+                            </div>
                         </div>
                     </div>
                     <div>
@@ -121,16 +122,16 @@
                 </div>
             </div>
         </div>
-        
+
         <div class="main-box">
             댓글란 | <span id="comments_count"></span>개의 댓글
             <div>
                 <div id="feed_comments">
 
-            </div>
+                </div>
                 <input type="text" id="comment-text" placeholder="댓글을 입력하세요.">
                 <button type="button" onclick="inputComment()">댓글 작성</button>
-        </div>
+            </div>
             <ul id="comment-list"></ul>
         </div>
 

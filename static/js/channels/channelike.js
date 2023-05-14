@@ -36,7 +36,6 @@ function feeddetail(feed_id) {
     window.location.href = `${frontend_base_url}/channeldetail.html?feed_id=${feed_id}`
 }
 
-
 window.onload = async function requestChannelInfo() {
     user = localStorage.getItem("payload")
     user_id = user.slice(-2)[0]
@@ -120,5 +119,3 @@ window.onload = async function requestChannelInfo() {
     })
 
 }
-
-//내가 좋아요한 게시글 모아보기 추가하기

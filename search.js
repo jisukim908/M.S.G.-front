@@ -46,5 +46,7 @@ async function searchFilter() {
 
         cardsBox.appendChild(newCol);
     });
+
+    location.href = `${frontend_base_url}/home.html?search=${input_value}`
 }
 

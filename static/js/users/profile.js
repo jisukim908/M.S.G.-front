@@ -2,6 +2,8 @@ window.onload = async function loadProfile() {
     user = localStorage.getItem("payload")
     user_id = user.slice(-2)[0]
 
+    console.log()
+
     const response = await fetch('http://127.0.0.1:8000/users/profile/'+ user_id + '/', {
         method : 'GET'
     })

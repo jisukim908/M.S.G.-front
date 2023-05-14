@@ -6,7 +6,7 @@ window.onload = async function loadProfile() {
 
     //태그 띄우기
     const response_tag = await fetch('http://127.0.0.1:8000/users/tag/', {
-        method : 'GET'
+        method: 'GET'
     })
     response_tags = await response_tag.json()
 
@@ -25,7 +25,7 @@ window.onload = async function loadProfile() {
 
     //게시글 띄우기
     const response_feed = await fetch(`${backend_base_url}` + '/', {
-        method:"GET",
+        method: "GET",
     })
     response_feeds = await response_feed.json()
     console.log(response_feeds)
@@ -44,12 +44,12 @@ window.onload = async function loadProfile() {
 
         const feedImage = document.createElement("img")
         feedImage.setAttribute("class", "card-img-top")
-       
+
         //video_key 확인
         video_in = Object.keys(feed).includes('video_key')
         console.log(video_in) //true
-        console.log(feed['video_key'])
-        if(video_in === true){
+
+        if (video_in === true) {
             //video key가 있으면 썸네일 가져와서 넣어주기
             feedImage.setAttribute("src", "https://img.youtube.com/vi/" + `${feed['video_key']}` + "/mqdefault.jpg")
         } else if(feed['image'] === true) {
@@ -98,16 +98,16 @@ async function handleLogout() {
 async function handleSearch(tagId) {
     console.log(tagId)
 
-    const response_search_tag = await fetch('http://127.0.0.1:8000/search/?search='+tagId, {
-        headers:{
+    const response_search_tag = await fetch('http://127.0.0.1:8000/search/?search=' + tagId, {
+        headers: {
             'Authorization': 'Bearer ' + localStorage.getItem("access"),
-            'content-type':'application/json',
+            'content-type': 'application/json',
         },
-        method:'GET',
+        method: 'GET',
     })
     response_json_search = await response_search_tag.json()
     console.log(response_json_search)
-    
+
     const feed_card = document.getElementById("feed_card")
     response_json_search.forEach((e) => {
         console.log(e['video_key'])

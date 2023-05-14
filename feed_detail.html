@@ -23,9 +23,9 @@
     <header class="main-header">
         <nav class="nav-left">
             <form class="d-flex">
-                <button class="header-logo">
+                <a class="header-logo" href="home.html">
                     <img src="/static/images/logo.png" alt="logo">
-                </button>
+                </a>
                 <div class="search">
                     <input class="form-control me-sm-2" type="search" placeholder="Search">
                 </div>
@@ -66,13 +66,14 @@
                                 </div>
                                 <div class="home-container">
                                     <div class="feed-container">
-                                        <h6 id="title"></h6>
+                                        <h4 id="title"></h4>
                                         <p id="context"></p>
-                                        <p id="hit_count"></p>
                                     </div>
                                     <div class="like-container">
                                         <!-- 좋아요 버튼 만들기 -->
                                         <button type="submit" method="POST"> 좋아요 👍 <p id="like_count"></p></button>
+                                        <h5 id="hit_count"></h5>
+                                        <p style="float:right; margin-left: 15px;">조회 수 </p>
                                         <div>
                                             <p id="created_date"></p>
                                             <p id="updated_date"></p>
@@ -86,7 +87,7 @@
                         <aside class="profile-content">
                             <div class="profile-box">
                                 <div class="profile-card">
-                                    <div style="float:left; margin-right:10px;">
+                                    <div class='card'>
                                         <img id="profile_image"></img>
                                     </div>
                                     <div style="float:left;">

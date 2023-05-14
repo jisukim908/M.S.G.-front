@@ -1,66 +1,62 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-  <meta charset="UTF-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="stylesheet" href="/static/css/users/profile.css" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@400;600;700;800;900&display=swap"
-    rel="stylesheet" />
-  <script src="/static/js/users/login.js"></script>
-  <script src="/static/js/users/profile.js"></script>
-  <title>My Page</title>
-</head>
-
-<body>
-  <header class="main-header">
-    <button class="header-logo">
-      <img src="/static/images/logo.png" alt="logo" />
-    </button>
-    <div class="header-btn">
-      <button type="button" onclick="location.href='home.html'">Home</button>
-      <button type="button" onclick="location.href='channel.html'">내 채널</button>
-      <button type="button" onclick="handleLogout()">로그아웃</button>
-    </div>
-  </header>
-  <main class="main-container">
-    <section class="user-information">
-      <div class="user-info">
-        <div class="user-form-info">
-          <p>email :</p>
-          <p id="email"></p>
-        </div>
-        <div>
-          <p>이름 :</p>
-          <p id="username"></p>
-        </div>
-        <div>
-          <p>내 소개 :</p>
-          <p id="bio"></p>
-        </div>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/static/css/users/profile.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@400;600;700;800;900&display=swap"
+        rel="stylesheet" />
+    <script src="/static/js/users/login.js"></script>
+    <script src="/static/js/users/profile.js"></script>
+    <title>My Page</title>
+  </head>
+  <body>
+    <header class="main-header">
+      <a class="header-logo" href="home.html">
+        <img src="/static/images/logo.png" alt="logo" />
+      </a>
+      <div class="header-btn">
+        <button type="button" onclick="location.href='channel.html'">내 채널</button>
+        <button type="button" onclick="handleLogout()">로그아웃</button>
       </div>
-      <section class="user-image">
-        <img src="" alt="profile_image" id="profile_image" />
+    </header>
+    <main class="main-container">
+      <section class="user-information">
+        <div class="user-info">
+          <div class="user-form-info">
+            <p>email :</p>
+            <p id="email"></p>
+          </div>
+          <div>
+            <p>이름 :</p>
+            <p id="username"></p>
+          </div>
+          <div>
+            <p>내 소개 :</p>
+            <p id="bio"></p>
+          </div>
+        </div>
+        <section class="user-image">
+          <img src="" alt="profile_image" id="profile_image" />
+        </section>
       </section>
-    </section>
-    <section class="user-tag">
-      <p class="user-tag-title">관심 태그</p>
-      <div id="tags" class="tag-item"></div>
-    </section>
-    <section class="user-tag">
-      <details>
-        <summary class="user-tag-title">팔로우 보기</summary>
-        <div id="follows" class="tag-item"></div>
-      </details>
-    </section>
-    <section class="profile-btn">
-      <button onclick="location.href='profile_edit.html'">수정하기</button>
-      <button onclick="location.href='index.html'">홈으로 가기</button>
-    </section>
-  </main>
-</body>
-
+      <section class="user-tag">
+        <p class="user-tag-title">관심 태그</p>
+        <div id="tags" class="tag-item"></div>
+      </section>
+      <section class="user-tag">
+        <details>
+          <summary class="user-tag-title">팔로우 보기</summary>
+          <div id="follows" class="tag-item"></div>
+        </details>
+      </section>
+      <section class="profile-btn">
+        <button onclick="location.href='profile_edit.html'">수정하기</button>
+        <button onclick="location.href='index.html'">홈으로 가기</button>
+      </section>
+    </main>
+  </body>
 </html>

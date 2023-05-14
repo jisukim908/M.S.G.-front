@@ -27,10 +27,11 @@
                     <img src="/static/images/logo.png" alt="logo">
                 </button>
                 <div class="search">
-                    <input class="form-control me-sm-2" type="search" placeholder="Search">
+                    <input class="form-control me-sm-2" type="text" placeholder="Search" id="feed-search">
                 </div>
                 <div class="search">
-                    <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
+                    <button class="btn btn-secondary my-2 my-sm-0" type="button"
+                        onclick="searchFilter()">Search</button>
                 </div>
             </form>
         </nav>
@@ -71,7 +72,8 @@
             </div>
         </div>
     </div>
-    
+    <script src="search.js"></script>
+
 </body>
 
 <footer>

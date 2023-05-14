@@ -1,12 +1,12 @@
 const backend_base_url = "http://127.0.0.1:8000"
 const frontend_base_url = "http://127.0.0.1:5501"
 
-window.onload = async function getFeedDetail(){
+window.onload = async function getFeedDetail() {
     console.log("콘솔 불러오기")
-    
+
     // 태그 띄우기
     const response_tag = await fetch('http://127.0.0.1:8000/users/tag/', {
-        method : 'GET'
+        method: 'GET'
     })
     response_tags = await response_tag.json()
 
@@ -23,16 +23,16 @@ window.onload = async function getFeedDetail(){
         tag_list.appendChild(tag_li).appendChild(tag_a)
     })
 
-// http://127.0.0.1:5501/feed_detail.html?id=4
+    // http://127.0.0.1:5501/feed_detail.html?id=4
 
     const urlParams = new URL(location.href).searchParams;
     const feed_id = urlParams.get('id');
 
-    const response = await fetch(`${backend_base_url}`+ '/' + feed_id + '/', {
-        method : 'GET'
+    const response = await fetch(`${backend_base_url}` + '/' + feed_id + '/', {
+        method: 'GET'
     })
     response_json = await response.json()
-    console.log(response_json)    
+    console.log(response_json)
 
     // 본문 내용
     const title = document.getElementById('title')
@@ -43,7 +43,7 @@ window.onload = async function getFeedDetail(){
     const likeCount = document.getElementById('like_count')
     const hitCount = document.getElementById('hit_count')
     // const feedImage = document.getElementById('image')
-    
+
     title.innerText = response_json['title']
     context.innerText = response_json['context']
     createdDate.innerText = new Date().toString(response_json['created_date']) + " 작성"
@@ -57,7 +57,7 @@ window.onload = async function getFeedDetail(){
     //key값에 video_key가 들어왔는지 확인
     video_in = Object.keys(response_json).includes('video_key')
     console.log(response_json['image'])
-    if(video_in !== null){
+    if (video_in !== null) {
         //video 보기, video-box 위치에 입력
         const videoBox = document.getElementById('video-box');
         const feedVideo = document.createElement('iframe')
@@ -67,12 +67,12 @@ window.onload = async function getFeedDetail(){
 
         // Use remote file
         feedVideo.setAttribute("src", 'https://www.youtube.com/embed/' + `${response_json['video_key']}`)
-        
+
         videoBox.appendChild(feedVideo);
-        
+
         console.log(response_json['image'])
         //image는 무조건 있는데, default_image인지 확인
-        if (response_json['image'] === "/media/static/default_image.jpg"){
+        if (response_json['image'] === "/media/static/default_image.jpg") {
 
         } else {
             const imageBox = document.getElementById('image-box');
@@ -82,7 +82,7 @@ window.onload = async function getFeedDetail(){
             imageBox.appendChild(feedImage)
         }
     } else {
-        if(response_json['image'] !== null) {
+        if (response_json['image'] !== null) {
             //image가 있으면 넣어주기
             const imageBox = document.getElementById('image-box');
             const feedImage = document.createElement("img")
@@ -96,17 +96,17 @@ window.onload = async function getFeedDetail(){
         likeCount.innerText = response_json['likes_count']
         hitCount.innerText = response_json['hits']
     }
-    
-    
+
+
 
     // 댓글 불러오기
     commentCount.innerText = response_json['comments_count']
     console.log(feed_id)
     const response_comment = await fetch(`${backend_base_url}/comments/${feed_id}`, {
-        headers:{
+        headers: {
             'Authorization': 'Bearer ' + localStorage.getItem("access"),
         },
-        method:"GET"
+        method: "GET"
     })
     const response_json_comment = await response_comment.json()
 
@@ -129,13 +129,13 @@ async function inputComment() {
 
     const comment_text = document.getElementById('comment-text').value
     const response_input = await fetch(`${backend_base_url}/comments/${feedId}/`, {
-        headers:{
+        headers: {
             'Authorization': 'Bearer ' + localStorage.getItem("access"),
-            'content-type':'application/json',
+            'content-type': 'application/json',
         },
-        method:"POST",
+        method: "POST",
         body: JSON.stringify({
-            "text":comment_text,
+            "text": comment_text,
         })
     })
     console.log(response_input)

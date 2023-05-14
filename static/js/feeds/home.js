@@ -5,10 +5,7 @@ const frontend_base_url = "http://127.0.0.1:5501"
 async function hit(feed_id) {
     console.log("조회수 +1")
 
-    user = localStorage.getItem("payload")
-    user_id = user.slice(-2)[0]
-
-    const response = await fetch(`${backend_base_url}/${user_id}/${feed_id}` + '/', {
+    const response = await fetch(`${backend_base_url}/${feed_id}` + '/', {
         headers: {
             'content-type': 'application/json',
         },

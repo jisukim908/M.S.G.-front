@@ -17,6 +17,7 @@ async function searchFilter() {
         const newCol = document.createElement("div");
         newCol.setAttribute("class", "col-md-4 col-6");
 
+        const newCard = document.createElement("div");
         newCard.setAttribute("class", "card");
         newCard.setAttribute("id", result.id);
         // console.log(result.id)
@@ -44,6 +45,6 @@ async function searchFilter() {
         newCol.appendChild(newCard);
 
         cardsBox.appendChild(newCol);
-    })
+    });
 }
 

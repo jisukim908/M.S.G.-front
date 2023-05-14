@@ -85,9 +85,36 @@
                     <div>
                         <aside class="profile-content">
                             <div class="profile-box">
-                                <p id="user"></p>
-                                <p>작성자 채널 정보 불러오기</p>
-                                <p></p>
+                                <div class="profile-card">
+                                    <div style="float:left; margin-right:10px;">
+                                        <img id="profile_image"></img>
+                                    </div>
+                                    <div style="float:left;">
+                                        <p id="username"></p>
+                                        <p id="joined_at"></p>
+                                    </div>
+                                </div>
+                                <div class="profile-card-2">
+                                    <p style="float:left;"> 팔로우 : </p>
+                                    <p style="float:left;" id="followers"></p>
+                                    <p style="float:left;"> 명 </p>
+                                </div>
+                                <div class="profile-card-2">
+                                    <!-- 작성자 채널로 이동 -->
+                                    <button id="author_channel"> 채널로 이동 </button>
+                                </div>
+                                <div class="profile-card">
+                                    <div>
+                                        <p style="margin-bottom: 5px;"> 소개 : </p>
+                                        <p id="bio"></p>
+                                    </div>
+                                </div>
+                                <div class="profile-card">
+                                    <div>
+                                        <p style="float:left; display: absolute; margin-bottom: 5px;"> 관심사 :</p>
+                                        <p id="tags" class="tag-item"></p>
+                                    </div>
+                                </div>
                             </div>
                         </aside>
                     </div>

@@ -1,6 +1,8 @@
 const backend_base_url = "http://127.0.0.1:8000"
 const frontend_base_url = "http://127.0.0.1:5501"
 
+
+
 window.onload = async function getFeedDetail(){
     console.log("콘솔 불러오기")
     
@@ -51,8 +53,42 @@ window.onload = async function getFeedDetail(){
     console.log(response_json['likes_count'])
 
     // user 정보, channel정보 받아와야함(백엔드 구현)
-    const username = document.getElementById('user')
-    username.innerText = response_json['user']
+    // const username = document.getElementById('user')
+    // username.innerText = response_json['user']
+    
+    const response_user = await fetch(`${backend_base_url}` + '/users/profile/'+ response_json['user_id'] + '/', {
+        method : 'GET'
+    })
+    author = await response_user.json()
+
+    console.log(author)
+    const userProfileImage = document.getElementById('profile_image')
+    const username = document.getElementById('username')
+    const bio = document.getElementById('bio')
+    const joinedAt = document.getElementById('joined_at')
+    const followers = document.getElementById('followers')
+    const tags = document.getElementById('tags')
+
+    userProfileImage.src = `${backend_base_url}` + response_json['profile_image']
+    username.innerText = author['username']
+    bio.innerText = author['bio']
+    joinedAt.innerText = new Date().toDateString(author['joined_at'])
+    followers.innerText = author['followers'].length
+    if(author['tags']){
+        author['tags'].forEach(tag => {
+            const userTag = document.createElement("p")
+            userTag.setAttribute('class', 'tag-card')
+
+            userTag.innerText = tag
+            tags.appendChild(userTag)
+        })
+    } else {
+        message = "아직 관심사가 없습니다"
+    }
+
+    // 작성자 채널 링크
+    const authorChannel = document.getElementById('author_channel')
+    authorChannel.setAttribute('onclick', `${backend_base_url}/channel/` + author['user_id'] + '/info/')
 
     //key값에 video_key가 들어왔는지 확인
     video_in = Object.keys(response_json).includes('video_key')
@@ -67,13 +103,11 @@ window.onload = async function getFeedDetail(){
 
         // Use remote file
         feedVideo.setAttribute("src", 'https://www.youtube.com/embed/' + `${response_json['video_key']}`)
-        
         videoBox.appendChild(feedVideo);
         
-        console.log(response_json['image'])
-        //image는 무조건 있는데, default_image인지 확인
-        if (response_json['image'] === "/media/static/default_image.jpg"){
 
+        //image, default_image인지 확인하여 출력여부 결정
+        if (response_json['image'] === "/media/static/default_image.jpg"){
         } else {
             const imageBox = document.getElementById('image-box');
             const feedImage = document.createElement("img")

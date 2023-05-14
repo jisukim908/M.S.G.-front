@@ -36,15 +36,9 @@ function feeddetail(feed_id) {
     window.location.href = `${frontend_base_url}/channeldetail.html?feed_id=${feed_id}`
 }
 
-
-window.onload = async function requestChannelInfo(input) {
+window.onload = async function requestChannelInfo() {
     user = localStorage.getItem("payload")
-
-    if (input == user.slice(-2)[0]) {
-        user_id = user.slice(-2)[0]
-    } else {
-        user_id = input
-    }
+    user_id = user.slice(-2)[0]
 
     //프로필정보가져오기
     const response = await fetch(`${backend_base_url}/channel/` + user_id + '/info/', {
@@ -125,5 +119,3 @@ window.onload = async function requestChannelInfo(input) {
     })
 
 }
-
-//내가 좋아요한 게시글 모아보기 추가하기

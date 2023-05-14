@@ -127,7 +127,8 @@ a {
 ul {
     color: #008080;
     list-style-type: none;
-} 
+}
+
 li {
     list-style-type: none;
 }
@@ -137,25 +138,25 @@ aside {
     width: 100%;
     max-width: 300px;
     height: 500px;
-    background:white;
+    background: white;
     border-radius: 10px;
-    
+
 }
 
 main {
     flex: 100%;
     height: 100%;
     width: 100%;
-    background:#e9e9e9
+    background: #e9e9e9
 }
 
 .content-container {
     clear: both;
-    position: relative; 
+    position: relative;
     padding-top: 20px;
 }
 
-.home-container{
+.home-container {
     clear: both;
     width: auto;
     background: #f5f5f5;
@@ -165,7 +166,7 @@ main {
     position: relative;
 }
 
-#profile-box{
+#profile-box {
     bottom: 100px;
     z-index: 9999;
     width: 500px;
@@ -174,7 +175,7 @@ main {
 }
 
 .col-md-3 {
-    float:left;
+    float: left;
     display: inline-flex;
     justify-content: center;
     margin-top: 20px;
@@ -182,4 +183,10 @@ main {
 
 #feed_card {
     width: 100%;
+}
+
+.card-img-top {
+    display: block;
+    width: 100%;
+    height: auto;
 }

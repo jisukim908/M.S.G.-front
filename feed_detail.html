@@ -19,13 +19,13 @@
     <title>MaStoryGee</title>
 </head>
 
-<body>
+<body style="background-color: rgb(245,245,245);">
     <header class="main-header">
         <nav class="nav-left">
             <form class="d-flex">
-                <button class="header-logo">
+                <a class="header-logo" href="home.html">
                     <img src="/static/images/logo.png" alt="logo">
-                </button>
+                </a>
                 <div class="search">
                     <input class="form-control me-sm-2" type="search" placeholder="Search">
                 </div>
@@ -35,6 +35,7 @@
             </form>
         </nav>
         <div class="header-btn">
+            <button onclick="location.href='home.html'">Home</button>
             <button onclick="location.href='profile.html'">내 프로필</button>
             <button onclick="location.href='channel.html'">내 채널</button>
             <button onclick="handleLogout()">로그아웃</button>
@@ -62,16 +63,18 @@
                             <div class="main-content">
                                 <div class="home-container">
                                     <div id="video-box"></div>
+                                    <div id="image-box"></div>
                                 </div>
                                 <div class="home-container">
                                     <div class="feed-container">
-                                        <h6 id="title"></h6>
+                                        <h4 id="title"></h4>
                                         <p id="context"></p>
-                                        <p id="hit_count"></p>
                                     </div>
                                     <div class="like-container">
                                         <!-- 좋아요 버튼 만들기 -->
                                         <button type="submit" method="POST"> 좋아요 👍 <p id="like_count"></p></button>
+                                        <h5 id="hit_count"></h5>
+                                        <p style="float:right; margin-left: 15px;">조회 수 </p>
                                         <div>
                                             <p id="created_date"></p>
                                             <p id="updated_date"></p>
@@ -84,9 +87,36 @@
                     <div>
                         <aside class="profile-content">
                             <div class="profile-box">
-                                <p id="user"></p>
-                                <p>작성자 채널 정보 불러오기</p>
-                                <p></p>
+                                <div class="profile-card">
+                                    <div class='card'>
+                                        <img id="profile_image"></img>
+                                    </div>
+                                    <div style="float:left;">
+                                        <p id="username"></p>
+                                        <p id="joined_at"></p>
+                                    </div>
+                                </div>
+                                <div class="profile-card-2">
+                                    <p style="float:left;"> 팔로우 : </p>
+                                    <p style="float:left;" id="followers"></p>
+                                    <p style="float:left;"> 명 </p>
+                                </div>
+                                <div class="profile-card-2">
+                                    <!-- 작성자 채널로 이동 -->
+                                    <button id="author_channel"> 채널로 이동 </button>
+                                </div>
+                                <div class="profile-card">
+                                    <div>
+                                        <p style="margin-bottom: 5px;"> 소개 : </p>
+                                        <p id="bio"></p>
+                                    </div>
+                                </div>
+                                <div class="profile-card">
+                                    <div>
+                                        <p style="float:left; display: absolute; margin-bottom: 5px;"> 관심사 :</p>
+                                        <p id="tags" class="tag-item"></p>
+                                    </div>
+                                </div>
                             </div>
                         </aside>
                     </div>
@@ -110,6 +140,6 @@
         </div>
     </main>
     <footer>
-    
+
     </footer>
 </body>

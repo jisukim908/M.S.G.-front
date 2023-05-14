@@ -1,14 +1,29 @@
 const backend_base_url = "http://127.0.0.1:8000"
 const frontend_base_url = "http://127.0.0.1:5501"
 
+//조회수 올리기 함수
+async function hit(feed_id) {
+    console.log("조회수 +1")
+
+    const response = await fetch(`${backend_base_url}/${feed_id}` + '/', {
+        headers: {
+            'content-type': 'application/json',
+        },
+        method: 'POST',
+    })
+
+    console.log(response)
+    location.href = `../../feed_detail.html?id=${feed_id}`;
+}
+
+
 window.onload = async function loadProfile() {
-    console.log("로딩 완료")
 
     
 
     //태그 띄우기
     const response_tag = await fetch('http://127.0.0.1:8000/users/tag/', {
-        method : 'GET'
+        method: 'GET'
     })
     response_tags = await response_tag.json()
 
@@ -27,7 +42,7 @@ window.onload = async function loadProfile() {
 
     //게시글 띄우기
     const response_feed = await fetch(`${backend_base_url}` + '/', {
-        method:"GET",
+        method: "GET",
     })
     response_feeds = await response_feed.json()
     console.log(response_feeds)
@@ -37,7 +52,11 @@ window.onload = async function loadProfile() {
         // feed 가지고오기
         const newCol = document.createElement("a")
         newCol.setAttribute("class", "col-md-3 col-sm-6 col-lg-2")
-        newCol.setAttribute("href", `../../feed_detail.html?id=${feed.id}`)
+        // newCol.setAttribute("href", `../../feed_detail.html?id=${feed.id}`)
+
+        // 조회수 클릭하면 올리기
+        newCol.setAttribute("onclick", `hit(${feed.id})`)
+
         const newCard = document.createElement("a")
         newCard.setAttribute("type", "button")
         newCard.setAttribute("class", "card")
@@ -46,15 +65,13 @@ window.onload = async function loadProfile() {
 
         const feedImage = document.createElement("img")
         feedImage.setAttribute("class", "card-img-top")
-       
-        //video_key 확인
-        video_in = Object.keys(feed).includes('video_key')
-        console.log(video_in) //true
 
-        if(video_in === true){
+        //video_key 확인
+        if(feed['video_key'] !== null){
             //video key가 있으면 썸네일 가져와서 넣어주기
-            feedImage.setAttribute("src", "https://img.youtube.com/vi/" + feed['video_key'] + "/mqdefault.jpg")
-        } else if(feed['image'] === true) {
+            feedImage.setAttribute("src", "https://img.youtube.com/vi/" + `${feed['video_key']}` + "/mqdefault.jpg")
+        } else if (feed['image'] === true) {
+
             //image가 있으면 넣어주기
             feedImage.setAttribute("src", `${backend_base_url}${feed.image}`)
         } else {
@@ -79,6 +96,67 @@ window.onload = async function loadProfile() {
 
         feedList.appendChild(newCol)
     })
+
+
+    //인기가 많은 게시글 가져오기
+    const responseBestFeeds = await fetch(`${backend_base_url}` + '/', {
+        method:"GET",
+    })
+    response_best_feeds = await responseBestFeeds.json()
+    
+    
+    // like_count 내림차순으로 객체 정렬
+    let sortByLikesCount = response_best_feeds.sort((best_a,best_b) => 
+    (best_b.likes_count - best_a.likes_count)) 
+    console.log(sortByLikesCount)    
+
+    const bestFeedList = document.getElementById("best_feed_card")
+    sortByLikesCount.forEach(feed => {
+        
+    const newCol = document.createElement("a")
+        newCol.setAttribute("class", "col-md-3 col-sm-6 col-lg-2")
+        newCol.setAttribute("href", `../../feed_detail.html?id=${feed.id}`)
+        const newCard = document.createElement("a")
+        newCard.setAttribute("type", "button")
+        newCard.setAttribute("class", "card")
+        newCard.setAttribute("id", feed.id)
+        newCol.appendChild(newCard)
+
+        const feedImage = document.createElement("img")
+        feedImage.setAttribute("class", "card-img-top")
+       
+        //video_key 확인
+        // video_in = Object.keys(feed).includes('video_key')
+        // console.log(video_in) //true
+        // console.log(feed['video_key'])
+        if(feed['video_key'] !== null){
+            //video key가 있으면 썸네일 가져와서 넣어주기
+            feedImage.setAttribute("src", "https://img.youtube.com/vi/" + `${feed['video_key']}` + "/mqdefault.jpg")
+        } else if(feed['image'] === true) {
+            //image가 있으면 넣어주기
+            feedImage.setAttribute("src", `${backend_base_url}${feed.image}`)
+        } else {
+            //image가 없으면 defaultimage 넣어주기
+            feedImage.setAttribute("src", "/static/img/default_image.jpg")
+        }
+        newCard.appendChild(feedImage)
+
+        const newCardBody = document.createElement("div")
+        newCardBody.setAttribute("class", "card-body")
+        newCard.appendChild(newCardBody)
+
+        const newCardTitle = document.createElement("h6")
+        newCardTitle.setAttribute("class", "card-title")
+        newCardTitle.innerText = feed.title
+        newCardBody.appendChild(newCardTitle)
+
+        const newCardName = document.createElement("p")
+        newCardName.setAttribute("class", "card-text")
+        newCardName.innerText = feed.user
+        newCardBody.appendChild(newCardName)
+
+        bestFeedList.appendChild(newCol)
+    })
 }
 
 
@@ -100,16 +178,16 @@ async function handleLogout() {
 async function handleSearch(tagId) {
     console.log(tagId)
 
-    const response_search_tag = await fetch('http://127.0.0.1:8000/search/?search='+tagId, {
-        headers:{
+    const response_search_tag = await fetch('http://127.0.0.1:8000/search/?search=' + tagId, {
+        headers: {
             'Authorization': 'Bearer ' + localStorage.getItem("access"),
-            'content-type':'application/json',
+            'content-type': 'application/json',
         },
-        method:'GET',
+        method: 'GET',
     })
     response_json_search = await response_search_tag.json()
     console.log(response_json_search)
-    
+
     const feed_card = document.getElementById("feed_card")
     response_json_search.forEach((e) => {
         console.log(e['video_key'])

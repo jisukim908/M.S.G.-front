@@ -23,9 +23,9 @@
     <header class="main-header">
         <nav class="nav-left">
             <form class="d-flex">
-                <button class="header-logo">
+                <a class="header-logo" href="home.html">
                     <img src="/static/images/logo.png" alt="logo">
-                </button>
+                </a>
                 <div class="search">
                     <input class="form-control me-sm-2" type="search" placeholder="Search">
                 </div>
@@ -35,7 +35,9 @@
             </form>
         </nav>
         <div class="header-btn">
+            <button onclick="location.href='home.html'">Home</button>
             <button onclick="location.href='profile.html'">내 프로필</button>
+            <button onclick="location.href='channellike.html'">좋아요한 게시글 모아보기</button>
             <button onclick="handleLogout()">로그아웃</button>
         </div>
     </header>
@@ -60,7 +62,7 @@
                                     <p id="username"></p>
                                 </div>
                                 <div class="channel-info">
-                                    <h6>Tags : </h6>
+                                    <h6>관심 Tags : </h6>
                                     <p id="tags" class="tag-item"></p>
                                 </div>
                                 <div class="channel-info">
@@ -77,5 +79,6 @@
                     </div>
                 </div>
             </div>
+        </div>
     </main>
 </body>

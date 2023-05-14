@@ -19,18 +19,19 @@
     <title>MaStoryGee</title>
 </head>
 
-<body>
+<body style="background-color: rgb(245,245,245);">
     <header class="main-header">
         <nav class="nav-left">
             <form class="d-flex">
-                <button class="header-logo">
+                <a class="header-logo" href="home.html">
                     <img src="/static/images/logo.png" alt="logo">
-                </button>
+                </a>
                 <div class="search">
-                    <input class="form-control me-sm-2" type="search" placeholder="Search">
+                    <input class="form-control me-sm-2" type="text" placeholder="Search" id="feed-search">
                 </div>
                 <div class="search">
-                    <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
+                    <button class="btn btn-secondary my-2 my-sm-0" type="button"
+                        onclick="searchFilter()">Search</button>
                 </div>
             </form>
         </nav>
@@ -58,20 +59,31 @@
             <div class="col-md-11">
                 <div class="main-box">
                     <main>
+                        <h4 style="float: left; margin-top:12px; margin-left: 35px;">최신 게시글</h4> 
+                        <button style="float: right; margin: 10px 35px 10px 0px;">
+                            새 게시글 작성하기
+                            <a herf="feed_create.html">
+                        </button>
+                        <!-- 최신 게시글 -->
                         <div class="home-container">
                             <div class="row">
                                 <div id="feed_card"></div>
                             </div>
                         </div>
+                        <h4 style="float: left; margin-top:15px; margin-left: 35px;">인기 게시글</h4> 
+                        <!-- 인기 게시글 -->
                         <div class="home-container">
-                            인기 많은 게시글
+                            <div class="row">
+                                <div id="best_feed_card"></div>
+                            </div>
                         </div>
                     </main>
                 </div>
             </div>
         </div>
     </div>
-    
+    <script src="search.js"></script>
+
 </body>
 
 <footer>

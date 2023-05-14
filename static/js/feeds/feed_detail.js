@@ -5,8 +5,8 @@ window.onload = async function getFeedDetail(){
     console.log("콘솔 불러오기")
 
     // 태그 띄우기
-    const response_tag = await fetch('http://127.0.0.1:8000/users/tag/', {
-        method: 'GET'
+    const response_tag = await fetch(`${backend_base_url}`+ '/users/tag/', {
+        method : 'GET'
     })
     response_tags = await response_tag.json()
 
@@ -32,7 +32,6 @@ window.onload = async function getFeedDetail(){
         method: 'GET'
     })
     response_json = await response.json()
-    console.log(response_json)
 
     // 본문 내용
     const title = document.getElementById('title')
@@ -42,24 +41,20 @@ window.onload = async function getFeedDetail(){
     const commentCount = document.getElementById('comments_count')
     const likeCount = document.getElementById('like_count')
     const hitCount = document.getElementById('hit_count')
-    // const feedImage = document.getElementById('image')
-
+    
     title.innerText = response_json['title']
     context.innerText = response_json['context']
-    createdDate.innerText = new Date().toString(response_json['created_date']) + " 작성"
-    updatedDate.innerText = new Date().toString(response_json['updated_date']) + " 수정"
-    console.log(response_json['likes_count'])
+    createdDate.innerText = new Date().toDateString(response_json['created_date']) + " 작성"
+    updatedDate.innerText = new Date().toDateString(response_json['updated_date']) + " 수정"
+    likeCount.innerText = String(response_json['likes_count'])
+    hitCount.innerText = String(response_json['hits'])
 
-    // user 정보, channel정보 받아와야함(백엔드 구현)
-    // const username = document.getElementById('user')
-    // username.innerText = response_json['user']
-    
+    // user 정보, channel정보 받아오기
     const response_user = await fetch(`${backend_base_url}` + '/users/profile/'+ response_json['user_id'] + '/', {
         method : 'GET'
     })
     author = await response_user.json()
 
-    console.log(author)
     const userProfileImage = document.getElementById('profile_image')
     const username = document.getElementById('username')
     const bio = document.getElementById('bio')
@@ -67,6 +62,7 @@ window.onload = async function getFeedDetail(){
     const followers = document.getElementById('followers')
     const tags = document.getElementById('tags')
 
+    userProfileImage.setAttribute('class', 'profile-image')
     userProfileImage.src = `${backend_base_url}` + response_json['profile_image']
     username.innerText = author['username']
     bio.innerText = author['bio']
@@ -86,18 +82,14 @@ window.onload = async function getFeedDetail(){
 
     // 작성자 채널 링크
     const authorChannel = document.getElementById('author_channel')
-    authorChannel.setAttribute('onclick', `${backend_base_url}/channel/` + author['user_id'] + '/info/')
+    authorChannel.setAttribute('onclick', `${backend_base_url}/channel/` + author['id'] + '/info/')
 
     //key값에 video_key가 들어왔는지 확인
-    video_in = Object.keys(response_json).includes('video_key')
-    console.log(response_json['image'])
-    if (video_in !== null) {
+    if(response_json['video_key'] !== null){
         //video 보기, video-box 위치에 입력
         const videoBox = document.getElementById('video-box');
         const feedVideo = document.createElement('iframe')
         feedVideo.setAttribute('class', 'videocard')
-        // Use local file
-        // video.src = 'video.mp4';
 
         // Use remote file
         feedVideo.setAttribute("src", 'https://www.youtube.com/embed/' + `${response_json['video_key']}`)
@@ -123,18 +115,16 @@ window.onload = async function getFeedDetail(){
             feedImage.setAttribute("src", `${backend_base_url}` + `${response_json['image']}`)
             imageBox.appendChild(feedImage)
         } else {
-            //image가 없으면 defaultimage 넣어주기?
+            //image가 없으면 defaultimage 넣어주기
             feedImage.setAttribute("src", "/static/img/default_image.jpg")
         }
-        likeCount.innerText = response_json['likes_count']
-        hitCount.innerText = response_json['hits']
+
     }
 
 
 
     // 댓글 불러오기
     commentCount.innerText = response_json['comments_count']
-    console.log(feed_id)
     const response_comment = await fetch(`${backend_base_url}/comments/${feed_id}`, {
         headers: {
             'Authorization': 'Bearer ' + localStorage.getItem("access"),
@@ -145,7 +135,6 @@ window.onload = async function getFeedDetail(){
 
     const feed_comments = document.getElementById("feed_comments")
     response_json_comment.forEach(comment => {
-        console.log(comment['user'])
         const comment_user = document.createElement('p')
         comment_user.innerText = comment['user']
         feed_comments.appendChild(comment_user)
@@ -171,7 +160,20 @@ async function inputComment() {
             "text": comment_text,
         })
     })
-    console.log(response_input)
     location.reload()
 }
 
+
+async function handleLogout() {
+    console.log("버튼 눌림 / 로그아웃")
+    const response = await fetch(`${backend_base_url}/users/logout/`, {
+        headers: {
+            'content-type': 'application/json',
+        },
+        method: 'POST',
+    })
+    localStorage.removeItem("payload")
+    localStorage.removeItem("access")
+    localStorage.removeItem("refresh")
+    location.href = 'login.html';
+}

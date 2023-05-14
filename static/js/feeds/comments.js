@@ -3,7 +3,7 @@
 // 해당 게시글 댓글 가져오기
 async function getComments(feedId) {
     const token = localStorage.getItem('access');
-    const response = await fetch(`http://127.0.0.1:8000/${feedId}/comments/`, {
+    const response = await fetch(`${backend_base_url}/${feedId}/comments/`, {
         method: 'GET',
         headers: {
             Authorization: `Bearer ${token}`,
@@ -18,7 +18,7 @@ async function getComments(feedId) {
 // 댓글 모아보기
 async function getAllComments() {
     const token = localStorage.getItem('access');
-    const response = await fetch('http://127.0.0.1:8000/comments/', {
+    const response = await fetch(`${backend_base_url}/comments/`, {
         method: 'GET',
         headers: {
             Authorization: `Bearer ${token}`,
@@ -39,7 +39,7 @@ async function createComment(text) {
         text: text,
     };
 
-    const response = await fetch('http://127.0.0.1:8000/comments/', {
+    const response = await fetch(`${backend_base_url}/comments/`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -62,7 +62,7 @@ async function createComment(feedId, text) {
         text: text,
     };
 
-    const response = await fetch('http://127.0.0.1:8000/comments/', {
+    const response = await fetch(`${backend_base_url}/comments/`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -83,7 +83,7 @@ async function updateComment(commentId, content) {
     const formData = new FormData();
     formData.append('content', content);
 
-    const response = await fetch(`http://127.0.0.1:8000/comments/${commentId}/`, {
+    const response = await fetch(`${backend_base_url}/comments/${commentId}/`, {
         method: 'PUT',
         headers: {
             Authorization: `Bearer ${token}`,
@@ -98,7 +98,7 @@ async function updateComment(commentId, content) {
 // 댓글 삭제
 async function deleteComment(commentId) {
     const token = localStorage.getItem('access');
-    const response = await fetch(`http://127.0.0.1:8000/comments/${commentId}/`, {
+    const response = await fetch(`${backend_base_url}/comments/${commentId}/`, {
         method: 'DELETE',
         headers: {
             Authorization: `Bearer ${token}`,
@@ -112,7 +112,7 @@ async function deleteComment(commentId) {
 // 댓글 좋아요
 async function likeComment(commentId) {
     const token = localStorage.getItem('access');
-    const response = await fetch(`http://127.0.0.1:8000/comments/${commentId}/like/`, {
+    const response = await fetch(`${backend_base_url}/comments/${commentId}/like/`, {
         method: 'POST',
         headers: {
             Authorization: `Bearer ${token}`,
@@ -126,7 +126,7 @@ async function likeComment(commentId) {
 // 댓글 싫어요
 async function dislikeComment(commentId) {
     const token = localStorage.getItem('access');
-    const response = await fetch(`http://127.0.0.1:8000/comments/${commentId}/dislike/`, {
+    const response = await fetch(`${backend_base_url}/comments/${commentId}/dislike/`, {
         method: 'POST',
         headers: {
             Authorization: `Bearer ${token}`,

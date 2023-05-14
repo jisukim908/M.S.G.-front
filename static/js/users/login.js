@@ -1,14 +1,17 @@
-window.onload = () => {
+const backend_base_url = "http://127.0.0.1:8000"
+const frontend_base_url = "http://127.0.0.1:5501"
 
+window.onload = ()=> {
+    
 }
 
 async function handleLogin() {
     const email = document.getElementById("email").value;
     const password = document.getElementById("password").value;
 
-    const response = await fetch('http://127.0.0.1:8000/users/api/token/', {
-        headers: {
-            'content-type': 'application/json',
+    const response = await fetch(`${backend_base_url}/users/api/token/`, {
+        headers:{
+            'content-type':'application/json',
         },
         method: 'POST',
         body: JSON.stringify({
@@ -34,9 +37,9 @@ async function handleLogin() {
 
 async function handleLogout() {
     console.log("버튼 눌림 / 로그아웃")
-    const response = await fetch('http://127.0.0.1:8000/users/logout/', {
-        headers: {
-            'content-type': 'application/json',
+    const response = await fetch(`${backend_base_url}/users/logout/`, {
+        headers:{
+            'content-type':'application/json',
         },
         method: 'POST',
     })

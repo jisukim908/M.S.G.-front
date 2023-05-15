@@ -176,3 +176,20 @@ async function handleLogout() {
     localStorage.removeItem("refresh")
     location.href = 'login.html';
 }
+
+
+async function handleLike() {
+    console.log("버튼 눌림 / 좋아요")
+
+    const urlParams = new URL(location.href).searchParams;
+    const feed_id = urlParams.get('id');
+
+    const response = await fetch(`${backend_base_url}/${feed_id}/likes/`, {
+        headers: {
+            'Authorization': 'Bearer ' + localStorage.getItem("access"),
+            'content-type': 'application/json',
+        },
+        method: 'POST',
+    })
+    location.reload()
+}

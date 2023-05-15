@@ -31,7 +31,7 @@ async function handleLogout() {
     location.href = 'login.html';
 }
 
-//상세페이지로 가기
+//관리 상세페이지로 가기
 function feeddetail(feed_id) {
     window.location.href = `${frontend_base_url}/channeldetail.html?feed_id=${feed_id}`
 }
@@ -83,18 +83,33 @@ window.onload = async function requestChannelInfo() {
         // feed 가지고오기
         const newCol = document.createElement("div")
         newCol.setAttribute("class", "col")
+
         // feed 상세페이지 아이디 가져가기
+        // user = localStorage.getItem("payload")
         if (user_id == user.slice(-2)[0]) {
             newCol.setAttribute("onclick", `feeddetail(${feed.id})`)
         } else {
             newCol.setAttribute("onclick", `feeddetailnotchannel(${feed.id})`)
         }
-
+        //게시글 모아보기
         const newCard = document.createElement("div")
         newCard.setAttribute("class", "card")
         newCard.setAttribute("id", feed.id)
         newCol.appendChild(newCard)
 
+        //좋아요한 게시글 모아보기
+
+        // const newlikeCard = document.createElement("div")
+        // newlikeCard.setAttribute("class", "col")
+        // newlikeCard.innerHTML = "좋아요한 게시글"
+        // newCol.appendChild(newlikeCard)
+
+        // const newlike = document.createElement("div")
+        // newlike.setAttribute("class", "card")
+        // newlike.setAttribute("id", feed.id)
+
+
+        //게시글 모아보기
         const feedImage = document.createElement("img")
         feedImage.setAttribute("class", "card-img-top")
 

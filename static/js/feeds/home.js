@@ -46,6 +46,21 @@ window.onload = async function loadProfile() {
         tag_list.appendChild(tag_li).appendChild(tag_a)
     })
 
+    // user 이름 띄우기
+    user = localStorage.getItem("payload")
+    user_id = user.slice(-2)[0]
+
+    console.log()
+
+    const response = await fetch('http://127.0.0.1:8000/users/profile/' + user_id + '/', {
+        method: 'GET'
+    })
+    response_json = await response.json()
+    console.log(response_json)
+
+    const homename = document.getElementById("userinfoname")
+    homename.innerHTML = `${response_json['username']}님 반갑습니다.`
+
     //게시글 띄우기
     const response_feed = await fetch(`${backend_base_url}` + '/', {
         method: "GET",

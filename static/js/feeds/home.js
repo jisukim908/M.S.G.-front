@@ -16,7 +16,17 @@ async function hit(feed_id) {
     location.href = `../../feed_detail.html?id=${feed_id}`;
 }
 
+//내채널 함수
+//async function mychannel() {
+//    user = localStorage.getItem("payload")
+//    user_id == user.slice(-2)[0]
+
+//    window.location.href = `${frontend_base_url}/channel.html?user_id=${user_id}`
+//}
+
+
 window.onload = async function loadProfile() {
+
     //태그 띄우기
     const response_tag = await fetch('http://127.0.0.1:8000/users/tag/', {
         method: 'GET'

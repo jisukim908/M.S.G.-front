@@ -48,7 +48,7 @@ async function FeedDelete(feed_id) {
     })
 
     console.log(response)
-    location.href = "channel.html";
+    location.href = "home.html";
 }
 
 window.onload = async function channelDetail() {

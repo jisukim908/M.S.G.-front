@@ -2,9 +2,9 @@ const backend_base_url = "http://127.0.0.1:8000"
 const frontend_base_url = "http://127.0.0.1:5501"
 
 //게시글 가져오기
-async function getFeeds() {
-    user = localStorage.getItem("payload")
-    user_id = user.slice(-2)[0]
+async function getFeeds(user_id) {
+    // user = localStorage.getItem("payload")
+    // user_id = user.slice(-2)[0]
 
     const response = await fetch(`${backend_base_url}/channel/` + user_id + '/')
     if (response.status == 200) {
@@ -31,20 +31,23 @@ async function handleLogout() {
     location.href = 'login.html';
 }
 
-//상세페이지로 가기
+//관리 상세페이지로 가기
 function feeddetail(feed_id) {
     window.location.href = `${frontend_base_url}/channeldetail.html?feed_id=${feed_id}`
 }
 
+//게시글 상세페이지로 가기
+function feeddetailnotchannel(feed_id) {
+    window.location.href = `${frontend_base_url}/feed_detail.html?id=${feed_id}`
+}
 
-window.onload = async function requestChannelInfo(input) {
+// 채널
+window.onload = async function requestChannelInfo() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const user_id = urlParams.get('author_id');
+    console.log(user_id)
+
     user = localStorage.getItem("payload")
-
-    if (input == user.slice(-2)[0]) {
-        user_id = user.slice(-2)[0]
-    } else {
-        user_id = input
-    }
 
     //프로필정보가져오기
     const response = await fetch(`${backend_base_url}/channel/` + user_id + '/info/', {
@@ -71,7 +74,7 @@ window.onload = async function requestChannelInfo(input) {
     })
 
     //게시글 가져오기
-    feeds = await getFeeds()
+    feeds = await getFeeds(user_id)
     console.log(feeds)
 
     const feed_list = document.getElementById("cards-box")
@@ -80,13 +83,33 @@ window.onload = async function requestChannelInfo(input) {
         // feed 가지고오기
         const newCol = document.createElement("div")
         newCol.setAttribute("class", "col")
+
         // feed 상세페이지 아이디 가져가기
-        newCol.setAttribute("onclick", `feeddetail(${feed.id})`)
+        // user = localStorage.getItem("payload")
+        if (user_id == user.slice(-2)[0]) {
+            newCol.setAttribute("onclick", `feeddetail(${feed.id})`)
+        } else {
+            newCol.setAttribute("onclick", `feeddetailnotchannel(${feed.id})`)
+        }
+        //게시글 모아보기
         const newCard = document.createElement("div")
         newCard.setAttribute("class", "card")
         newCard.setAttribute("id", feed.id)
         newCol.appendChild(newCard)
 
+        //좋아요한 게시글 모아보기
+
+        // const newlikeCard = document.createElement("div")
+        // newlikeCard.setAttribute("class", "col")
+        // newlikeCard.innerHTML = "좋아요한 게시글"
+        // newCol.appendChild(newlikeCard)
+
+        // const newlike = document.createElement("div")
+        // newlike.setAttribute("class", "card")
+        // newlike.setAttribute("id", feed.id)
+
+
+        //게시글 모아보기
         const feedImage = document.createElement("img")
         feedImage.setAttribute("class", "card-img-top")
 
@@ -125,5 +148,3 @@ window.onload = async function requestChannelInfo(input) {
     })
 
 }
-
-//내가 좋아요한 게시글 모아보기 추가하기

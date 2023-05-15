@@ -1,10 +1,10 @@
 const backend_base_url = "http://127.0.0.1:8000"
 const frontend_base_url = "http://127.0.0.1:5501"
 
-window.onload = async function getFeedDetail(){
+window.onload = async function getFeedDetail() {
     // 태그 띄우기
-    const response_tag = await fetch(`${backend_base_url}`+ '/users/tag/', {
-        method : 'GET'
+    const response_tag = await fetch(`${backend_base_url}` + '/users/tag/', {
+        method: 'GET'
     })
     response_tags = await response_tag.json()
 
@@ -40,7 +40,7 @@ window.onload = async function getFeedDetail(){
     const commentCount = document.getElementById('comments_count')
     const likeCount = document.getElementById('like_count')
     const hitCount = document.getElementById('hit_count')
-    
+
     title.innerText = response_json['title']
     context.innerText = response_json['context']
     createdDate.innerText = new Date().toDateString(response_json['created_date']) + " 작성"
@@ -49,8 +49,8 @@ window.onload = async function getFeedDetail(){
     hitCount.innerText = String(response_json['hits'])
 
     // user 정보, channel정보 받아오기
-    const response_user = await fetch(`${backend_base_url}` + '/users/profile/'+ response_json['user_id'] + '/', {
-        method : 'GET'
+    const response_user = await fetch(`${backend_base_url}` + '/users/profile/' + response_json['user_id'] + '/', {
+        method: 'GET'
     })
     author = await response_user.json()
 
@@ -67,7 +67,7 @@ window.onload = async function getFeedDetail(){
     bio.innerText = author['bio']
     joinedAt.innerText = new Date().toDateString(author['joined_at'])
     followers.innerText = author['followers'].length
-    if(author['tags']){
+    if (author['tags']) {
         author['tags'].forEach(tag => {
             const userTag = document.createElement("p")
             userTag.setAttribute('class', 'tag-card')
@@ -81,10 +81,10 @@ window.onload = async function getFeedDetail(){
 
     // 작성자 채널 링크
     const authorChannel = document.getElementById('author_channel')
-    authorChannel.setAttribute('onclick', `${backend_base_url}/channel/` + author['id'] + '/info/')
+    authorChannel.setAttribute('onclick', `gochannel(${author['id']})`)
 
     //key값에 video_key가 들어왔는지 확인
-    if(response_json['video_key'] !== null){
+    if (response_json['video_key'] !== null) {
         //video 보기, video-box 위치에 입력
         const videoBox = document.getElementById('video-box');
         const feedVideo = document.createElement('iframe')
@@ -94,10 +94,10 @@ window.onload = async function getFeedDetail(){
         feedVideo.setAttribute("src", 'https://www.youtube.com/embed/' + `${response_json['video_key']}`)
 
         videoBox.appendChild(feedVideo);
-        
+
 
         //image, default_image인지 확인하여 출력여부 결정
-        if (response_json['image'] === "/media/static/default_image.jpg"){
+        if (response_json['image'] === "/media/static/default_image.jpg") {
         } else {
             const imageBox = document.getElementById('image-box');
             const feedImage = document.createElement("img")
@@ -192,4 +192,9 @@ async function handleLike() {
         method: 'POST',
     })
     location.reload()
+}
+
+//작성자채널로 가기
+function gochannel(feed_id) {
+    window.location.href = `${frontend_base_url}/channel.html?author_id=${feed_id}`
 }

@@ -36,8 +36,9 @@
             </form>
         </nav>
         <div class="header-btn">
+            <button id="userinfoname"></button>
             <button onclick="location.href='profile.html'">내 프로필</button>
-            <button onclick="location.href='channel.html'">내 채널</button>
+            <!--<button onclick="mychannel()">내 채널</button>-->
             <button onclick="handleLogout()">로그아웃</button>
         </div>
     </header>
@@ -59,8 +60,9 @@
             <div class="col-md-11">
                 <div class="main-box">
                     <main>
-                        <h4 style="float: left; margin-top:12px; margin-left: 35px;">최신 게시글</h4> 
-                        <button onclick="location.href='feed_create.html'" style="float: right; margin: 10px 35px 10px 0px;">
+                        <h4 style="float: left; margin-top:12px; margin-left: 35px;">최신 게시글</h4>
+                        <button onclick="location.href='feed_create.html'"
+                            style="float: right; margin: 10px 35px 10px 0px;">
                             새 게시글 작성하기
                             <a herf="feed_create.html">
                         </button>
@@ -70,7 +72,7 @@
                                 <div id="feed_card"></div>
                             </div>
                         </div>
-                        <h4 style="float: left; margin-top:15px; margin-left: 35px;">인기 게시글</h4> 
+                        <h4 style="float: left; margin-top:15px; margin-left: 35px;">인기 게시글</h4>
                         <!-- 인기 게시글 -->
                         <div class="home-container">
                             <div class="row">
@@ -83,6 +85,16 @@
         </div>
     </div>
     <script src="search.js"></script>
+    <script>
+        window.addEventListener('DOMContentLoaded', (event) => {
+            const urlParams = new URLSearchParams(window.location.search);
+            const searchKeyword = urlParams.get('search');
+            if (searchKeyword) {
+                document.getElementById('feed-search').value = searchKeyword;
+                searchFilter(); // search.js의 searchFilter() 함수 호출하여 검색 결과 표시
+            }
+        });
+    </script>
 
 </body>
 

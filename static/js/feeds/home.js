@@ -16,10 +16,16 @@ async function hit(feed_id) {
     location.href = `../../feed_detail.html?id=${feed_id}`;
 }
 
+//내채널 함수
+//async function mychannel() {
+//    user = localStorage.getItem("payload")
+//    user_id == user.slice(-2)[0]
+
+//    window.location.href = `${frontend_base_url}/channel.html?user_id=${user_id}`
+//}
+
 
 window.onload = async function loadProfile() {
-
-    
 
     //태그 띄우기
     const response_tag = await fetch('http://127.0.0.1:8000/users/tag/', {
@@ -39,6 +45,21 @@ window.onload = async function loadProfile() {
         tag_a.innerText = tag['name']
         tag_list.appendChild(tag_li).appendChild(tag_a)
     })
+
+    // user 이름 띄우기
+    user = localStorage.getItem("payload")
+    user_id = user.slice(-2)[0]
+
+    console.log()
+
+    const response = await fetch('http://127.0.0.1:8000/users/profile/' + user_id + '/', {
+        method: 'GET'
+    })
+    response_json = await response.json()
+    console.log(response_json)
+
+    const homename = document.getElementById("userinfoname")
+    homename.innerHTML = `${response_json['username']}님 반갑습니다.`
 
     //게시글 띄우기
     const response_feed = await fetch(`${backend_base_url}` + '/', {
@@ -67,7 +88,7 @@ window.onload = async function loadProfile() {
         feedImage.setAttribute("class", "card-img-top")
 
         //video_key 확인
-        if(feed['video_key'] !== null){
+        if (feed['video_key'] !== null) {
             //video key가 있으면 썸네일 가져와서 넣어주기
             feedImage.setAttribute("src", "https://img.youtube.com/vi/" + `${feed['video_key']}` + "/mqdefault.jpg")
         } else if (feed['image'] === true) {
@@ -100,20 +121,20 @@ window.onload = async function loadProfile() {
 
     //인기가 많은 게시글 가져오기
     const responseBestFeeds = await fetch(`${backend_base_url}` + '/', {
-        method:"GET",
+        method: "GET",
     })
     response_best_feeds = await responseBestFeeds.json()
-    
-    
+
+
     // like_count 내림차순으로 객체 정렬
-    let sortByLikesCount = response_best_feeds.sort((best_a,best_b) => 
-    (best_b.likes_count - best_a.likes_count)) 
-    console.log(sortByLikesCount)    
+    let sortByLikesCount = response_best_feeds.sort((best_a, best_b) =>
+        (best_b.likes_count - best_a.likes_count))
+    console.log(sortByLikesCount)
 
     const bestFeedList = document.getElementById("best_feed_card")
     sortByLikesCount.forEach(feed => {
-        
-    const newCol = document.createElement("a")
+
+        const newCol = document.createElement("a")
         newCol.setAttribute("class", "col-md-3 col-sm-6 col-lg-2")
         newCol.setAttribute("href", `../../feed_detail.html?id=${feed.id}`)
         const newCard = document.createElement("a")
@@ -124,15 +145,15 @@ window.onload = async function loadProfile() {
 
         const feedImage = document.createElement("img")
         feedImage.setAttribute("class", "card-img-top")
-       
+
         //video_key 확인
         // video_in = Object.keys(feed).includes('video_key')
         // console.log(video_in) //true
         // console.log(feed['video_key'])
-        if(feed['video_key'] !== null){
+        if (feed['video_key'] !== null) {
             //video key가 있으면 썸네일 가져와서 넣어주기
             feedImage.setAttribute("src", "https://img.youtube.com/vi/" + `${feed['video_key']}` + "/mqdefault.jpg")
-        } else if(feed['image'] === true) {
+        } else if (feed['image'] === true) {
             //image가 있으면 넣어주기
             feedImage.setAttribute("src", `${backend_base_url}${feed.image}`)
         } else {

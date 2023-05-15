@@ -27,17 +27,17 @@
                     <img src="/static/images/logo.png" alt="logo">
                 </a>
                 <div class="search">
-                    <input class="form-control me-sm-2" type="search" placeholder="Search">
+                    <input class="form-control me-sm-2" type="text" placeholder="Search" id="feed-search">
                 </div>
                 <div class="search">
-                    <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
+                    <button class="btn btn-secondary my-2 my-sm-0" type="button"
+                        onclick="searchRedirect()">Search</button>
                 </div>
             </form>
         </nav>
         <div class="header-btn">
             <button onclick="location.href='home.html'">Home</button>
             <button onclick="location.href='profile.html'">내 프로필</button>
-            <button onclick="location.href='channellike.html'">좋아요한 게시글 모아보기</button>
             <button onclick="handleLogout()">로그아웃</button>
         </div>
     </header>
@@ -75,10 +75,18 @@
                     <div class="col-md-9">
                         <div class="row row-cols-1 row-cols-md-4 g-4" id="cards-box">
                             <!--게시글공간-->
+                            <!--좋아요한 게시글 공간-->
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </main>
+    <script>
+        function searchRedirect() {
+            const searchKeyword = document.getElementById("feed-search").value;
+            window.location.href = `home.html?search=${encodeURIComponent(searchKeyword)}`;
+        }
+    </script>
+    <script src="search.js"></script>
 </body>

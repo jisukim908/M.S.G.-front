@@ -48,7 +48,7 @@ async function FeedDelete(feed_id) {
     })
 
     console.log(response)
-    location.href = "channel.html";
+    location.href = "home.html";
 }
 
 window.onload = async function channelDetail() {
@@ -103,6 +103,10 @@ window.onload = async function channelDetail() {
         newDeleteButton.setAttribute("onclick", `FeedDelete(${feed['id']})`)
         newDeleteButton.innerHTML = "삭제하기"
         feed_edit.appendChild(newDeleteButton)
+        const newbackButton = document.createElement("button")
+        newbackButton.setAttribute("onclick", "history.back()")
+        newbackButton.innerHTML = "뒤로가기"
+        feed_edit.appendChild(newbackButton)
 
         //feed 가져오기
         const newTitle = document.createElement("h2")

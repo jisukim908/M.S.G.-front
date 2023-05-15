@@ -17,12 +17,12 @@ async function hit(feed_id) {
 }
 
 //내채널 함수
-//async function mychannel() {
-//    user = localStorage.getItem("payload")
-//    user_id == user.slice(-2)[0]
+async function mychannel() {
+    user = localStorage.getItem("payload")
+    user_id == user.slice(-2)[0]
 
-//    window.location.href = `${frontend_base_url}/channel.html?user_id=${user_id}`
-//}
+    window.location.href = `${frontend_base_url}/channel.html?author_id=${user_id}`
+}
 
 
 window.onload = async function loadProfile() {

@@ -250,7 +250,7 @@ async function FeedUpdate(feed_id) {
         })
     })
 
-    location.href = `${frontend_base_url}/channel.html?author_id=${feed_id}`
+    location.href = `${frontend_base_url}/channel.html?author_id=${user_id}`
 }
 
 

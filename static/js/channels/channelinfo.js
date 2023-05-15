@@ -41,7 +41,7 @@ function feeddetailnotchannel(feed_id) {
     window.location.href = `${frontend_base_url}/feed_detail.html?id=${feed_id}`
 }
 
-// 내채널 
+// 채널
 window.onload = async function requestChannelInfo() {
     const urlParams = new URLSearchParams(window.location.search);
     const user_id = urlParams.get('author_id');

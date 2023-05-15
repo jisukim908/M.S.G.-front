@@ -222,6 +222,8 @@ async function FeedUpdate(feed_id) {
     console.log(video_key)
     const context = document.getElementById('feed-desc').value;
     console.log(context)
+    // const feed_image = document.getElementById('feed-image').src;
+    // console.log(feed_image)
 
     const query = 'input[name="tag"]:checked';
     const selectedEls = document.querySelectorAll(query)
@@ -244,7 +246,7 @@ async function FeedUpdate(feed_id) {
             "title": title,
             "video_key": video_key,
             "context": context,
-            "tag": tag,
+            "tag": tag
         })
     })
 

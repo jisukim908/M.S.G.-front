@@ -177,6 +177,23 @@ async function handleLogout() {
     location.href = 'login.html';
 }
 
+
+async function handleLike() {
+    console.log("버튼 눌림 / 좋아요")
+
+    const urlParams = new URL(location.href).searchParams;
+    const feed_id = urlParams.get('id');
+
+    const response = await fetch(`${backend_base_url}/${feed_id}/likes/`, {
+        headers: {
+            'Authorization': 'Bearer ' + localStorage.getItem("access"),
+            'content-type': 'application/json',
+        },
+        method: 'POST',
+    })
+    location.reload()
+}
+
 //작성자채널로 가기
 function gochannel(feed_id) {
     window.location.href = `${frontend_base_url}/channel.html?author_id=${feed_id}`

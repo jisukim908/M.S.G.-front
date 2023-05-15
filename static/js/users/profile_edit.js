@@ -89,7 +89,7 @@ async function handleEdit() {
     const password = response_json['password']
     const username = document.getElementById('username').value;
     const bio = document.getElementById('bio').value;
-    const profile_image = document.getElementById('profile_image').src;
+    // const profile_image = document.getElementById('profile_image').src;
 
 
     const response_edit = await fetch('http://127.0.0.1:8000/users/profile/' + user_id + '/', {
@@ -104,7 +104,7 @@ async function handleEdit() {
             "username": username,
             "bio": bio,
             "tags": tag,
-            "profile_image": profile_image
+            //"profile_image": profile_image
         })
     })
     console.log(response_edit)

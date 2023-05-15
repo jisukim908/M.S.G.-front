@@ -30,14 +30,15 @@
                     <input class="form-control me-sm-2" type="text" placeholder="Search" id="feed-search">
                 </div>
                 <div class="search">
-                    <button class="btn btn-secondary my-2 my-sm-0" type="button" onclick="searchRedirect()">Search</button>
+                    <button class="btn btn-secondary my-2 my-sm-0" type="button"
+                        onclick="searchRedirect()">Search</button>
                 </div>
             </form>
         </nav>
         <div class="header-btn">
             <button onclick="location.href='home.html'">Home</button>
             <button onclick="location.href='profile.html'">내 프로필</button>
-            <button onclick="location.href='channel.html'">내 채널</button>
+            <!--<button onclick="location.href='channel.html'">내 채널</button>-->
             <button onclick="handleLogout()">로그아웃</button>
         </div>
     </header>
@@ -144,8 +145,8 @@
     </footer>
     <script>
         function searchRedirect() {
-          const searchKeyword = document.getElementById("feed-search").value;
-          window.location.href = `home.html?search=${encodeURIComponent(searchKeyword)}`;
+            const searchKeyword = document.getElementById("feed-search").value;
+            window.location.href = `home.html?search=${encodeURIComponent(searchKeyword)}`;
         }
     </script>
     <script src="search.js"></script>

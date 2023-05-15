@@ -2,8 +2,8 @@ window.onload = async function loadProfile() {
     user = localStorage.getItem("payload")
     user_id = user.slice(-2)[0]
 
-    const response = await fetch('http://127.0.0.1:8000/users/profile/'+ user_id + '/', {
-        method : 'GET'
+    const response = await fetch('http://127.0.0.1:8000/users/profile/' + user_id + '/', {
+        method: 'GET'
     })
     response_json = await response.json()
     const email = document.getElementById('email')
@@ -12,12 +12,12 @@ window.onload = async function loadProfile() {
     const profile_image = document.getElementById('profile_image')
 
     email.innerText = response_json['email']
-    username.setAttribute("value" ,response_json['username'])
+    username.setAttribute("value", response_json['username'])
     bio.innerText = response_json['bio']
     profile_image.src = 'http://127.0.0.1:8000' + response_json['profile_image']
 
     const response_tag = await fetch('http://127.0.0.1:8000/users/tag/', {
-        method : 'GET'
+        method: 'GET'
     });
 
     response_json_tag = await response_tag.json()
@@ -34,7 +34,7 @@ window.onload = async function loadProfile() {
         tags.appendChild(newTag).appendChild(newInput)
 
     })
-    
+
     response_json['tags'].forEach(e => {
         document.getElementById(e).checked = true;
     })
@@ -59,7 +59,7 @@ window.onload = async function loadProfile() {
 function preview(input) {
     if (input.files && input.files[0]) {
         var reader = new FileReader();
-        reader.onload = function(e) {
+        reader.onload = function (e) {
             document.getElementById("profile_image").src = e.target.result;
         };
         reader.readAsDataURL(input.files[0]);
@@ -73,8 +73,8 @@ async function handleEdit() {
     user = localStorage.getItem("payload")
     user_id = user.slice(-2)[0]
 
-    const response = await fetch('http://127.0.0.1:8000/users/profile/'+ user_id + '/', {
-        method : 'GET'
+    const response = await fetch('http://127.0.0.1:8000/users/profile/' + user_id + '/', {
+        method: 'GET'
     })
     response_json = await response.json()
 
@@ -90,37 +90,37 @@ async function handleEdit() {
     const username = document.getElementById('username').value;
     const bio = document.getElementById('bio').value;
     const profile_image = document.getElementById('profile_image').src;
-    
-  
+
+
     const response_edit = await fetch('http://127.0.0.1:8000/users/profile/' + user_id + '/', {
-        headers:{
+        headers: {
             'Authorization': 'Bearer ' + localStorage.getItem("access"),
-            'content-type':'application/json',
+            'content-type': 'application/json',
         },
-        method:'PUT',
+        method: 'PUT',
         body: JSON.stringify({
             "email": email,
             "password": password,
             "username": username,
             "bio": bio,
             "tags": tag,
-            "profile_image":profile_image
+            "profile_image": profile_image
         })
     })
     console.log(response_edit)
     location.href = 'profile.html'
-    
+
 }
 
 const handleFollow = (followUserId) => {
     console.log(followUserId)
 
-    const response_follow = fetch('http://127.0.0.1:8000/users/follow/'+followUserId+'/', {
-        headers:{
+    const response_follow = fetch('http://127.0.0.1:8000/users/follow/' + followUserId + '/', {
+        headers: {
             'Authorization': 'Bearer ' + localStorage.getItem("access"),
-            'content-type':'application/json',
+            'content-type': 'application/json',
         },
-        method:'POST',
+        method: 'POST',
     })
     location.reload()
 }
